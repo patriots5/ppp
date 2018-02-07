@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="b6a12aa1-60e7-482b-ab5b-21fcd7c2e26d" discardOkResults="true" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="LSD-NewScore-WithoutAccomodations" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="4046c61b-72c0-4c16-8096-2744a4607985fileName">NewScore-WithoutAccomodations</con:setting><con:setting id="b6a12aa1-60e7-482b-ab5b-21fcd7c2e26dfileName">LSD-NewScore-WithoutAccomodations</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="jdbc" name="getBKNGID" id="ebda10b0-8b64-4639-adf0-642991807c00"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT BKNG_ID FROM BKNG WHERE ETS_APNTMT_ID = '${Properties#ETS_APPOINTMENT_ID}'</con:query><con:assertion type="XPath Match" id="1fe1723d-992c-4ce9-b566-b5f156f55749" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)>0</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="e35066d8-a543-4b2d-b446-20010162fb3d"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="true" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>BKNG_ID</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>getBKNGID</con:sourceStep><con:sourcePath>//Results[1]/ResultSet[1]/Row[1]/BKNG_ID[1]</con:sourcePath><con:targetType>BKNG_ID</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="properties" name="Properties" id="6565ea40-8788-4ae7-90c5-16e036e7b81c"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ETS_APPOINTMENT_ID</con:name><con:value>3501610170024448</con:value></con:property><con:property><con:name>BKNG_ID</con:name><con:value>4696342</con:value></con:property><con:property><con:name>APPT_DTE_STR</con:name><con:value>2017-07-15T10:00:00.000-05:00</con:value></con:property><con:property><con:name>APNTMT_DT</con:name><con:value>15-JUL-17 10.00.00.000000000 AM</con:value></con:property><con:property><con:name>TST_SCR_GATE_DTE</con:name><con:value>15-JUL-17</con:value></con:property><con:property><con:name>103_score</con:name><con:value>30</con:value></con:property><con:property><con:name>104_score</con:name><con:value>30</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="jdbc" name="UpdateAppoinmentDateScoreGatedate" id="83d1efc7-f779-42bf-b034-08ac5593c479" disabled="true"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>UPDATE BKNG SET APPT_DTE_STR = '${Properties#APPT_DTE_STR}',APNTMT_DT = '${Properties#APNTMT_DT}',TST_SCR_GATE_DTE = '${Properties#TST_SCR_GATE_DTE}' WHERE ETS_APNTMT_ID = '${Properties#ETS_APPOINTMENT_ID}'</con:query><con:assertion type="XPath Match" id="9af867bb-48f7-4133-b21e-a3601456766c" name="Match content of [UpdateCount]"><con:configuration><path>//Results[1]/UpdateCount[1]/text()</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_TST_SCR_table" id="afad167d-b00c-4829-8bc7-7b32e95f2cd4"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select TST_LVL_SCR_NAM,SRC_TST_SCR_ID,PST_ADM_SCR,MIN_SCR,MAX_SCR
+from tst_scr where bkng_id = ${Properties#BKNG_ID} ORDER BY TST_LVL_SCR_NAM ASC</con:query><con:assertion type="Simple NotContains" id="bf18bd5d-4402-4b03-b83a-db96cd6b3135" name="Not Contains-ToValidateTerminationType"><con:configuration><token>GRIGENQ2O00117000TSP002</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="5e6b6497-3d8f-4ca3-96ba-4049992847f2" name="XPath Match"><con:configuration><path>//Results[1]/ResultSet[1]</path><content><![CDATA[<ResultSet fetchSize="10">
+  <Row rowNumber="1">
+    <TST_LVL_SCR_NAM>LISTSCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>103</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>${Properties#103_score}</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="2">
+    <TST_LVL_SCR_NAM>LISTSKL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>226</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>3</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="3">
+    <TST_LVL_SCR_NAM>READSCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>102</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>30</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="4">
+    <TST_LVL_SCR_NAM>READSKL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>225</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>3</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="5">
+    <TST_LVL_SCR_NAM>SPKSCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>104</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>${Properties#104_score}</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="6">
+    <TST_LVL_SCR_NAM>SPKSKL1</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>220</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="7">
+    <TST_LVL_SCR_NAM>SPKSKL2</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>221</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="8">
+    <TST_LVL_SCR_NAM>SPKSKL3</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>222</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="9">
+    <TST_LVL_SCR_NAM>TOTAL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>109</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>119</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="10">
+    <TST_LVL_SCR_NAM>WRITSCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>105</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>30</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="11">
+    <TST_LVL_SCR_NAM>WRTSKL1</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>223</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="12">
+    <TST_LVL_SCR_NAM>WRTSKL2</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>224</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+</ResultSet>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_table" id="71ee155d-c047-4aef-98aa-fef92e4c2102"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * from BKNG WHERE BKNG_ID = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="6ed4c62e-7786-4153-ac42-83e1601680ac" name="Match content of [APNTMT_DT]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="7cf0bee9-a1b7-48b8-8768-fd1ad3bd757b" name="Match content of [BKNG_STS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/BKNG_STS_TYP_CDE[1]/text()</path><content>CHI</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="697f5cc3-ab3a-4470-b059-ea1aeeecbb85" name="Match content of [DOC_ID]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/DOC_ID[1]/text()</path><content>${Properties#ETS_APPOINTMENT_ID}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="03bb2bc3-b6b9-4bc4-985d-da2b7b80a93b" name="Match content of [SCR_RPT_STS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="d4301cfa-6352-4c3f-bae4-8d537c474387" name="XPath Match"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/IBIS_TST_ADM_ID[1]/text()</path><content>20170111B</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_TST_SCR_XML_table" id="2179adac-b6e9-4dba-b28f-6b4f5fcd7d92"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select TST_SCR_XML_TXT
+from TST_SCR_XML where bkng_id = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="1c938eb1-24b0-4831-b3ff-76f85cecc3ea" name="Match content of [TST_SCR_XML_TXT]"><con:configuration><path>(//Results[1]/ResultSet[1]/Row[1]/TST_SCR_XML_TXT[1]/text()) != ''</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_ADTNL_FLD_table" id="b1a74a42-e2c5-4fb0-bdb4-02298ed29d66"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT CLMN_NAM,CLMN_VAL
+FROM BKNG_ADTNL_FLD WHERE bkng_id = ${Properties#BKNG_ID}
+ORDER BY CLMN_NAM ASC</con:query><con:assertion type="XPath Match" id="985bc3e8-b337-4c99-8990-c9ee8a32b644" name="Match content of [ResultSet]"><con:configuration><path>//Results[1]/ResultSet[1]</path><content><![CDATA[<ResultSet fetchSize="10">
+  <Row rowNumber="1">
+    <CLMN_NAM>ADMINCODE</CLMN_NAM>
+    <CLMN_VAL>20170111B</CLMN_VAL>
+  </Row>
+  <Row rowNumber="2">
+    <CLMN_NAM>CANDIDATESCORESTATUS</CLMN_NAM>
+    <CLMN_VAL>RPTBL</CLMN_VAL>
+  </Row>
+  <Row rowNumber="3">
+    <CLMN_NAM>CTRID</CLMN_NAM>
+    <CLMN_VAL>${Properties#ETS_APPOINTMENT_ID}</CLMN_VAL>
+  </Row>
+  <Row rowNumber="4">
+    <CLMN_NAM>DELIVERYMODE</CLMN_NAM>
+    <CLMN_VAL>CBT</CLMN_VAL>
+  </Row>
+  <Row rowNumber="5">
+    <CLMN_NAM>ETSTESTCENTERCOUNTRYCODE</CLMN_NAM>
+    <CLMN_VAL>USA</CLMN_VAL>
+  </Row>
+  <Row rowNumber="6">
+    <CLMN_NAM>EXTRACTDATETIME</CLMN_NAM>
+    <CLMN_VAL>2017-02-13T22:12:05.678-05:00</CLMN_VAL>
+  </Row>
+  <Row rowNumber="7">
+    <CLMN_NAM>FIELDSCORECONFIGVERSION</CLMN_NAM>
+    <CLMN_VAL>20170111B.2</CLMN_VAL>
+  </Row>
+  <Row rowNumber="8">
+    <CLMN_NAM>ISOTESTCENTERCOUNTRYCODE</CLMN_NAM>
+    <CLMN_VAL>592</CLMN_VAL>
+  </Row>
+  <Row rowNumber="9">
+    <CLMN_NAM>NONOPERATIONALCRCOUNTREPORTEDTORATINGSYSTEM</CLMN_NAM>
+    <CLMN_VAL>0</CLMN_VAL>
+  </Row>
+  <Row rowNumber="10">
+    <CLMN_NAM>OPERATIONALCRCOUNTREPORTEDTORATINGSYSTEM</CLMN_NAM>
+    <CLMN_VAL>8</CLMN_VAL>
+  </Row>
+  <Row rowNumber="11">
+    <CLMN_NAM>PROGRAMCODE</CLMN_NAM>
+    <CLMN_VAL>TEL</CLMN_VAL>
+  </Row>
+  <Row rowNumber="12">
+    <CLMN_NAM>REGISTRATIONSYSTEMID</CLMN_NAM>
+    <CLMN_VAL>ERS</CLMN_VAL>
+  </Row>
+  <Row rowNumber="13">
+    <CLMN_NAM>RESPONSECOUNT</CLMN_NAM>
+    <CLMN_VAL>1</CLMN_VAL>
+  </Row>
+  <Row rowNumber="14">
+    <CLMN_NAM>SCOREINDICATOR</CLMN_NAM>
+    <CLMN_VAL>1</CLMN_VAL>
+  </Row>
+  <Row rowNumber="15">
+    <CLMN_NAM>SUBFORM</CLMN_NAM>
+    <CLMN_VAL>000493-01-0000000001</CLMN_VAL>
+  </Row>
+  <Row rowNumber="16">
+    <CLMN_NAM>TESTCENTERADDRESSLINE1</CLMN_NAM>
+    <CLMN_VAL>660 Rosedale Road</CLMN_VAL>
+  </Row>
+  <Row rowNumber="17">
+    <CLMN_NAM>TESTCENTERCITY</CLMN_NAM>
+    <CLMN_VAL>PRINCETON</CLMN_VAL>
+  </Row>
+  <Row rowNumber="18">
+    <CLMN_NAM>TESTCENTERCODE</CLMN_NAM>
+    <CLMN_VAL>STNDEV3</CLMN_VAL>
+  </Row>
+  <Row rowNumber="19">
+    <CLMN_NAM>TESTCENTERNAME</CLMN_NAM>
+    <CLMN_VAL>STNDEV3</CLMN_VAL>
+  </Row>
+  <Row rowNumber="20">
+    <CLMN_NAM>TESTCENTERPOSTALCODE</CLMN_NAM>
+    <CLMN_VAL>08541</CLMN_VAL>
+  </Row>
+  <Row rowNumber="21">
+    <CLMN_NAM>TESTCENTERSTATEPROVINCE</CLMN_NAM>
+    <CLMN_VAL>NJ</CLMN_VAL>
+  </Row>
+  <Row rowNumber="22">
+    <CLMN_NAM>TESTCENTERTIMEZONE</CLMN_NAM>
+    <CLMN_VAL>-5</CLMN_VAL>
+  </Row>
+  <Row rowNumber="23">
+    <CLMN_NAM>TESTCODE</CLMN_NAM>
+    <CLMN_VAL>XML</CLMN_VAL>
+  </Row>
+  <Row rowNumber="24">
+    <CLMN_NAM>TESTDATE</CLMN_NAM>
+    <CLMN_VAL>2017-02-13T11:30:04.008-05:00</CLMN_VAL>
+  </Row>
+  <Row rowNumber="25">
+    <CLMN_NAM>TEST_PKG</CLMN_NAM>
+    <CLMN_VAL>TELXMLDSD00001000PKG001</CLMN_VAL>
+  </Row>
+</ResultSet>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="1ab9ebea-e768-44da-abe2-7ec62d9ba589" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>25</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_ANLYS_RSLT_table" id="f9658976-6a59-40bf-8dec-14e1bcb9fbbb"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select *
+from BKNG_ANLYS_RSLT where bkng_id = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="ffc57e3b-434e-4459-beac-392e4916d0fc" name="Match content of [BKNG_ANLYS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/BKNG_ANLYS_TYP_CDE[1]/text()</path><content>LSDRDY</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_SCR_RPT_STGNG_table" id="d9b2a28e-24a2-4f86-9a00-97f23274beb5"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM BKNG_SCR_RPT_STGNG where bkng_id = ${Properties#BKNG_ID} ORDER BY DATE_CREATED DESC</con:query><con:assertion type="XPath Match" id="decdeb9e-eebd-49e8-9e2f-ab8d9680fbd2" name="Match content of [PGM_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/PGM_CDE[1]/text()</path><content>TEL</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="757214f5-cfa0-430f-ace4-7d4c3e25c887" name="Match content of [SCR_RPT_EXTRCT_STS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_EXTRCT_STS_TYP_CDE[1]/text()</path><content>RDPRC</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="b6e34aa5-5057-453f-b3dd-939760cd2d91" name="Match content of [SCR_RPT_STS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="groovy" name="cleanUpData" id="4169fb5c-772d-473b-8648-e552c1dc3959" disabled="true"><con:settings/><con:config><script>import cleanup.ScoreLoadService;
+ScoreLoadService CleanData = new ScoreLoadService(testRunner.testCase.testSuite.project.activeEnvironment.name);
+log.info CleanData.removeNewScores(context.expand( '${Properties#BKNG_ID}' ).toInteger());
+</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>61d648b0-59ac-4a50-8ad9-b54144e387a0</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4a0a6626-16d2-4807-a3b9-ae854701e527</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>eddb6d72-1a57-467b-a592-6191005e470f</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4339a01d-fa7f-47aa-bb9e-a05f9461cebb</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>7c437242-9b6a-46fb-b9ea-22fce565591e</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>3a678e8c-d321-4d0a-a17e-c1b0c285611c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>91dbaa83-1eae-4383-a636-647e76598302</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>11312169-a67a-4345-9582-302e5b7df03c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>dc828f45-60c9-4f54-82bd-cb138b8a88f8</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>aabb59f4-5616-4cb3-8e4f-d1fe79d61d29</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>50cb566c-b2b3-4def-9a38-25442ff17aaf</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>800cf1c0-fb85-45cb-894b-00a86aba7330</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>6df66bc3-7830-4feb-b0f5-4e979d604a71</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>788d0e56-e8a4-45ce-90e9-64c60ec504a0</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>1960d2ab-aa08-4782-9d59-c275c87eb2f7</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>ad2093ae-f9d5-4184-97e4-cb6ef8e6fe8b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>0cb78edb-cabd-455e-8b79-2cbfc0b4a08c</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>33a40bbf-8753-4993-82d0-eab73918ec87</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8d30b5f4-c0b5-4020-824b-ef4abad846a4</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>f3b32232-076e-403a-a364-21f2fbb9d556</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>efb3f01b-9109-4028-a388-4e6f5f5dc773</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>97b5c719-a8ae-4414-9e97-b18ce61ba642</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>82033d17-0a1e-4016-a7a6-f62b52047d3d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>b03fdaa2-f6d3-4845-8586-902dcff76404</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4169fb5c-772d-473b-8648-e552c1dc3959</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="8813140e-773e-4e32-a9f2-19bbe1b757d6"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="c5f2be6e-96f6-4f7b-8c06-9027807d55b3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="5c76c1c8-0b52-4c16-a576-30e5ec0e03e3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="3c247fad-11ea-48df-9244-ccc1c452c36f"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

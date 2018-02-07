@@ -1,0 +1,2458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="b9f85df3-b521-4c85-b541-0427a61fb1f4" discardOkResults="true" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="NewScoreGRE-BookingStatus-CHI-CBT" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" maxResults="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="332f33d6-63a3-4597-93be-fe8c9eca6464fileName">NewScoreGRE-BookingStatus-CHI</con:setting><con:setting id="b9f85df3-b521-4c85-b541-0427a61fb1f4fileName">NewScoreGRE-BookingStatus-CHI-CBT</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="jdbc" name="getETSAppoinmentId" id="5843c536-d58b-4486-8913-0b5b864fc2b0"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>${#TestSuite#getETSAppointmentId_GRE_CBT}</con:query><con:assertion type="XPath Match" id="1fe1723d-992c-4ce9-b566-b5f156f55749" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)>0</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="1d8187dc-9369-4ea7-8820-48bc512a731b"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>ETS_APPOINTMENT_ID</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>getETSAppoinmentId</con:sourceStep><con:sourcePath>//Results[1]/ResultSet[1]/Row[1]/ETS_APNTMT_ID[1]</con:sourcePath><con:targetType>ETS_APPOINTMENT_ID</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath/><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="true" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>BKNG_ID</con:name><con:sourceType>ResponseAsXml</con:sourceType><con:sourceStep>getETSAppoinmentId</con:sourceStep><con:sourcePath>//Results[1]/ResultSet[1]/Row[1]/BKNG_ID[1]</con:sourcePath><con:targetType>BKNG_ID</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="properties" name="Properties" id="cdb8c3bb-b262-4d42-a5c4-154032916218"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>ETS_APPOINTMENT_ID</con:name><con:value>4875809170017558</con:value></con:property><con:property><con:name>BKNG_ID</con:name><con:value>392539</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="jdbc" name="UpdateStatusCode" id="a006dd33-8a77-49df-950a-398d2399cf61"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>UPDATE BKNG SET BKNG_STS_TYP_CDE = 'CHI' WHERE BKNG_ID=${Properties#BKNG_ID}
+</con:query><con:assertion type="XPath Match" id="1fe1723d-992c-4ce9-b566-b5f156f55749" name="Check count of [Row]"><con:configuration><path>//Results/UpdateCount/text()</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="restrequest" name="NewScore" id="ee1db9e7-1186-4caa-b0d4-efc94dec9aa6"><con:settings/><con:config service="ScoreLoadWebService" resourcePath="/ereg-scoreload-service/ereg/soap/scorereportingservice/reportScores" methodName="ReportScores" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="NewScore" id="dc73e843-54b6-490c-b3b2-e31e172a3f7a" mediaType="text/xml" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="password" value="1qaz@WSX"/>
+  &lt;con:entry key="username" value="Intsyseregdvi"/>
+&lt;/xml-fragment></con:setting></con:settings><con:endpoint>${Environment}</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+		<wsse:Security soap:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<wsse:UsernameToken wsu:Id="UsernameToken-80153886E8D852B6D214641074236401">
+				<wsse:Username>Intsyseregdvi</wsse:Username>
+				<wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">1qaz@WSX</wsse:Password>
+			</wsse:UsernameToken>
+		</wsse:Security>
+	</SOAP-ENV:Header>
+	
+	<soap:Body>
+	
+	<ns2:ScoreReportingRequest xsi:schemaLocation="http://eskm.ets.org/sm/schemas/ScoreReportingRequest ScoreReportingRequest.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://eskm.ets.org/sm/schemas/ScoreReportingRequest">
+	<sourceSystem>eSKM</sourceSystem>
+	<programCode>GRI</programCode>
+	<testCode>GEN</testCode>
+	<adminCode>20161108B</adminCode>
+	<ctrId>${Properties#ETS_APPOINTMENT_ID}</ctrId>
+	<registrationSystemId>ERS</registrationSystemId>
+	<statusCode>RPTBL</statusCode>
+	<typeCode>GENERIC</typeCode>
+	
+	<scoreReportXml contentType="2.0" contentVersion="ets_extended_imsqti_v2p1.xsd"><![CDATA[
+	
+<assessmentResult xmlns="ets_extended_imsqti_v2p1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:extcontext="http://eskm.ets.org/schema/extension_context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ets_extended_imsqti_v2p1 ets_extended_imsqti_v2p1.xsd">
+	<context>
+		<lip:identification xmlns:lip="http://www.imsglobal.org/xsd/imslip_v1p0">
+			<lip:contentype>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ProgramCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>GRI</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>GEN</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">RegistrationSystemId</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>ERS</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">CTRID</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>${Properties#ETS_APPOINTMENT_ID}</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">FieldScoreConfigVersion</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>20160216A.1</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestDate</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>2016-04-28T11:04:23.728-04:00</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>APCN-9971</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterName</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>ETS LAB</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterAddressLine1</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>Woodhall - D509</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterCity</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>PRINCETON</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterStateProvince</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>NJ</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ETSTestCenterCountryCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>592</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ISOTestCenterCountryCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>USA</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterPostalCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>08541</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TestCenterTimeZone</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>-4</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">AdminCode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>20160216A</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">Ethnicity</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>9900471069</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ResponseCount</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>1</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">TEST_PKG</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>GRIGENSTP00117000PKG001</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">SUBFORM</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>100171-01-0000000001</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">DeliveryMode</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>MST</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">OperationalCRCountReportedToRatingSystem</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>2</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">NonOperationalCRCountReportedToRatingSystem</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>0</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">CandidateScoreStatus</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>RPTBL</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ExtractDateTime</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>2016-04-29 10:02:30.349</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">ScoreIndicator</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>1</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+				<lip:temporal>
+					<lip:temporalfield>
+						<lip:fieldlabel>
+							<lip:typename>
+								<lip:tyvalue xml:lang="en">DateOfBirth</lip:tyvalue>
+							</lip:typename>
+						</lip:fieldlabel>
+						<lip:fielddata>07101990</lip:fielddata>
+					</lip:temporalfield>
+				</lip:temporal>
+			</lip:contentype>
+			<lip:ext_identification>
+				<lip:address>
+					<lip:pobox xml:lang="en"/>
+					<lip:street/>
+					<lip:city xml:lang="en">Plainsboro</lip:city>
+					<lip:statepr xml:lang="en">NJ</lip:statepr>
+					<lip:region xml:lang="en">592</lip:region>
+					<lip:country xml:lang="en">USA</lip:country>
+					<lip:postcode xml:lang="en">08536</lip:postcode>
+				</lip:address>
+				<lip:demographics>
+					<lip:gender gender="M"/>
+				</lip:demographics>
+			</lip:ext_identification>
+		</lip:identification>
+		<extension_context>
+			<designatedInstitutions>
+				<extcontext:designatedInstitution>
+					<extcontext:code>4837</extcontext:code>
+					<extcontext:name>U CA Los Angeles</extcontext:name>
+					<extcontext:department>
+						<extcontext:code>0901</extcontext:code>
+						<extcontext:name>Natural Sciences</extcontext:name>
+					</extcontext:department>
+					<extcontext:testsToReport>
+						<extcontext:userSelection>GENREC</extcontext:userSelection>
+					</extcontext:testsToReport>
+				</extcontext:designatedInstitution>
+				<extcontext:designatedInstitution>
+					<extcontext:code>4007</extcontext:code>
+					<extcontext:name>Arizona State U</extcontext:name>
+					<extcontext:department>
+						<extcontext:code>0999</extcontext:code>
+						<extcontext:name>Natural Sciences -- Other</extcontext:name>
+					</extcontext:department>
+					<extcontext:testsToReport>
+						<extcontext:userSelection>GEN</extcontext:userSelection>
+					</extcontext:testsToReport>
+				</extcontext:designatedInstitution>
+			</designatedInstitutions>
+			<attendingInstitution>
+				<extcontext:code>3657</extcontext:code>
+				<extcontext:name>New England Coll</extcontext:name>
+				<extcontext:department>
+					<extcontext:code>0999</extcontext:code>
+					<extcontext:name>Natural Sciences -- Other</extcontext:name>
+				</extcontext:department>
+				<extcontext:testsToReport>
+					<extcontext:userSelection>GEN</extcontext:userSelection>
+				</extcontext:testsToReport>
+			</attendingInstitution>
+			<BIQs>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00001</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>3</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00003</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>9900471529</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00004</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>9900471473</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00005</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>9900471069</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00006</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>9900470130</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>GRE00016</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id>0901</extcontext:id>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>VE126100</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id/>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+				<extcontext:BIQ>
+					<extcontext:question>
+						<extcontext:id>VE126101</extcontext:id>
+					</extcontext:question>
+					<extcontext:responses>
+						<extcontext:response>
+							<extcontext:id/>
+						</extcontext:response>
+					</extcontext:responses>
+				</extcontext:BIQ>
+			</BIQs>
+			<itemsSentToRatingSystem>
+				<extcontext:item>VC047822</extcontext:item>
+				<extcontext:item>VC048273</extcontext:item>
+			</itemsSentToRatingSystem>
+		</extension_context>
+	</context>
+	<testResult identifier="20160216A">
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SESSION">
+			<value fieldIdentifier="GRIGENSTP00117000SES002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SUBFORM">
+			<value fieldIdentifier="100171-01-0000000001">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENW1O00117000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENQ1O00117000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENV1O00117000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENQ1V00062000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENV2O00117000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION">
+			<value fieldIdentifier="GRIGENQ2O00117000TSP002">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00ENR">
+			<value fieldIdentifier="020">13.5279</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00NC">
+			<value fieldIdentifier="011">8</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00OM">
+			<value fieldIdentifier="013">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00RPT">
+			<value fieldIdentifier="023">136</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00SCL">
+			<value fieldIdentifier="022">135.8935</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT00WR">
+			<value fieldIdentifier="012">32</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT01ANS">
+			<value fieldIdentifier="005">20</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT01NC">
+			<value fieldIdentifier="001">4</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT01NP">
+			<value fieldIdentifier="004">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT01OM">
+			<value fieldIdentifier="003">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT01WR">
+			<value fieldIdentifier="002">16</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT02ANS">
+			<value fieldIdentifier="010">20</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT02NC">
+			<value fieldIdentifier="006">4</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT02NP">
+			<value fieldIdentifier="009">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT02OM">
+			<value fieldIdentifier="008">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="QNT02WR">
+			<value fieldIdentifier="007">16</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00ENR">
+			<value fieldIdentifier="050">14.0609</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00NC">
+			<value fieldIdentifier="041">9</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00OM">
+			<value fieldIdentifier="043">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00RPT">
+			<value fieldIdentifier="053">140</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00SCL">
+			<value fieldIdentifier="052">139.9658</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL00WR">
+			<value fieldIdentifier="042">31</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL01ANS">
+			<value fieldIdentifier="035">20</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL01NC">
+			<value fieldIdentifier="031">5</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL01NP">
+			<value fieldIdentifier="034">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL01OM">
+			<value fieldIdentifier="033">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL01WR">
+			<value fieldIdentifier="032">15</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL02ANS">
+			<value fieldIdentifier="040">20</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL02NC">
+			<value fieldIdentifier="036">4</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL02NP">
+			<value fieldIdentifier="039">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL02OM">
+			<value fieldIdentifier="038">0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="VBL02WR">
+			<value fieldIdentifier="037">16</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="WRT00ARG">
+			<value fieldIdentifier="062">4.0000</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="WRT00ISS">
+			<value fieldIdentifier="061">6.0000</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="WRT00RPT">
+			<value fieldIdentifier="064">5.0</value>
+		</outcomeVariable>
+		<outcomeVariable cardinality="single" baseType="float" identifier="WRT00TOT">
+			<value fieldIdentifier="063">5.0000</value>
+		</outcomeVariable>
+	</testResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC047822" sequenceIndex="1">
+		<outcomeVariable identifier="crRatings" cardinality="multiple">
+			<rater identifier="11000" code="E">
+				<dimension>
+					<value fieldIdentifier="DimensionCode">SC</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">06</value>
+				</dimension>
+			</rater>
+			<rater identifier="11001" code="F">
+				<dimension>
+					<value fieldIdentifier="DimensionCode">SC</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">06</value>
+				</dimension>
+			</rater>
+		</outcomeVariable>
+		<templateVariable identifier="AgreementSample" cardinality="single">
+			<value>No</value>
+		</templateVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>6.0000</value>
+		</outcomeVariable>
+		<templateVariable identifier="EssayEntryMode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</templateVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC048273" sequenceIndex="2">
+		<outcomeVariable identifier="crRatings" cardinality="multiple">
+			<rater identifier="11000" code="E">
+				<dimension>
+					<value fieldIdentifier="DimensionCode">PR</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+				<dimension>
+					<value fieldIdentifier="DimensionCode">LAN</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+				<dimension>
+					<value fieldIdentifier="DimensionCode">IN</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+			</rater>
+			<rater identifier="11001" code="F">
+				<dimension>
+					<value fieldIdentifier="DimensionCode">LAN</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+				<dimension>
+					<value fieldIdentifier="DimensionCode">PR</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+				<dimension>
+					<value fieldIdentifier="DimensionCode">IN</value>
+					<value fieldIdentifier="ScoreResultType">E</value>
+					<value fieldIdentifier="Rating">04</value>
+				</dimension>
+			</rater>
+		</outcomeVariable>
+		<templateVariable identifier="AgreementSample" cardinality="single">
+			<value>No</value>
+		</templateVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>4.0000</value>
+		</outcomeVariable>
+		<templateVariable identifier="EssayEntryMode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</templateVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB329493" sequenceIndex="1">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB448181" sequenceIndex="2">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC088919" sequenceIndex="3">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB101014" sequenceIndex="4">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="LB002917" sequenceIndex="5">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DM001196" sequenceIndex="6">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB302504" sequenceIndex="7">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB307413" sequenceIndex="8">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB449416" sequenceIndex="9">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DM001618" sequenceIndex="10">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE658353" sequenceIndex="11">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF388455" sequenceIndex="12">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF090481" sequenceIndex="13">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143852" sequenceIndex="14">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143851" sequenceIndex="15">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143853" sequenceIndex="16">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB156232" sequenceIndex="17">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB443909" sequenceIndex="18">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC431066" sequenceIndex="19">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC183092" sequenceIndex="20">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>56</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB519533" sequenceIndex="1">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="UM100020" sequenceIndex="2">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC046299" sequenceIndex="3">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF455760" sequenceIndex="4">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF236851" sequenceIndex="5">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH045959" sequenceIndex="6">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC154922" sequenceIndex="7">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC154921" sequenceIndex="8">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336106" sequenceIndex="9">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336107" sequenceIndex="10">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336104" sequenceIndex="11">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336108" sequenceIndex="12">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE753062" sequenceIndex="13">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF094492" sequenceIndex="14">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC143542" sequenceIndex="15">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>5</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC054698" sequenceIndex="16">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="AK003595" sequenceIndex="17">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>5</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352714" sequenceIndex="18">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>5</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352713" sequenceIndex="19">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352716" sequenceIndex="20">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DG000055" sequenceIndex="1">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="LB001473" sequenceIndex="2">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB199885" sequenceIndex="3">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB329083" sequenceIndex="4">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB355530" sequenceIndex="5">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB445440" sequenceIndex="6">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH356094" sequenceIndex="7">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH337620" sequenceIndex="8">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB196565" sequenceIndex="9">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>5</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB165543" sequenceIndex="10">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH278991" sequenceIndex="11">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH245248" sequenceIndex="12">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH212568" sequenceIndex="13">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750903" sequenceIndex="14">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750904" sequenceIndex="15">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750906" sequenceIndex="16">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>67</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH316822" sequenceIndex="17">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>6</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH316574" sequenceIndex="18">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE342657" sequenceIndex="19">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH188493" sequenceIndex="20">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>78</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298128" sequenceIndex="1">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC398383" sequenceIndex="2">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC213348" sequenceIndex="3">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB601424" sequenceIndex="4">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB539427" sequenceIndex="5">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE613905" sequenceIndex="6">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC078597" sequenceIndex="7">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC078599" sequenceIndex="8">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC297814" sequenceIndex="9">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298060" sequenceIndex="10">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298058" sequenceIndex="11">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC051973" sequenceIndex="12">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC049969" sequenceIndex="13">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC167897" sequenceIndex="14">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC052905" sequenceIndex="15">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB172121" sequenceIndex="16">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE586787" sequenceIndex="17">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE586785" sequenceIndex="18">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC156998" sequenceIndex="19">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC168835" sequenceIndex="20">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC306879" sequenceIndex="1">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC393286" sequenceIndex="2">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC030093" sequenceIndex="3">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC305289" sequenceIndex="4">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB179851" sequenceIndex="5">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC361429" sequenceIndex="6">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB343579" sequenceIndex="7">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB305308" sequenceIndex="8">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB179378" sequenceIndex="9">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB445422" sequenceIndex="10">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>5</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC030034" sequenceIndex="11">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB506722" sequenceIndex="12">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC031212" sequenceIndex="13">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>1</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003532" sequenceIndex="14">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>1</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003534" sequenceIndex="15">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003533" sequenceIndex="16">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB614590" sequenceIndex="17">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>3</value>
+			</candidateResponse>
+		</responseVariable>
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="UB100887" sequenceIndex="18">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>2</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE616950" sequenceIndex="19">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>4</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.00</value>
+		</outcomeVariable>
+	</itemResult>
+	<itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB613872" sequenceIndex="20">
+		<responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single">
+			<candidateResponse>
+				<value>9</value>
+			</candidateResponse>
+		</responseVariable>
+		<outcomeVariable identifier="EditCode" cardinality="single" baseType="integer">
+			<value>0</value>
+		</outcomeVariable>
+		<outcomeVariable identifier="Score" cardinality="single" baseType="integer">
+			<value>0.0</value>
+		</outcomeVariable>
+	</itemResult>
+</assessmentResult>
+
+		]]]]>><![CDATA[</scoreReportXml>
+</ns2:ScoreReportingRequest>
+</soap:Body></soap:Envelope>]]></con:request><con:originalUri>https://services-dev-ext.ereg.ets.org/ereg-soap-service/ereg/soap/scorereportingservice/reportScores</con:originalUri><con:assertion type="Valid HTTP Status Codes" id="dcc350e4-6a4d-4b0b-8ce4-6bbd86bf6c62" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>ScoreLoad-Dev</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:environmentSpec><con:entry environmentId="6e2c7e08-8bc4-4d16-a04c-5e3e0f5c559d"><con:authProfile>ScoreLoad-Dev</con:authProfile></con:entry><con:entry environmentId="3a648999-07c7-461c-bd8a-12e7b94e4592"><con:authProfile>ScoreLoad-Dev</con:authProfile></con:entry><con:entry environmentId="8813140e-773e-4e32-a9f2-19bbe1b757d6"><con:authProfile>ScoreLoad-Dev</con:authProfile></con:entry><con:entry environmentId="c5f2be6e-96f6-4f7b-8c06-9027807d55b3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="5c76c1c8-0b52-4c16-a576-30e5ec0e03e3"><con:authProfile>No Authorization</con:authProfile></con:entry><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="3c247fad-11ea-48df-9244-ccc1c452c36f"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="3324844d-b697-4f50-83fd-939b32fc138d"><con:authProfile>ScoreLoad-Dev</con:authProfile></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>ScoreLoad-Dev</con:authProfile></con:entry></con:environmentSpec></con:restRequest></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_table" id="cb53378d-fac3-40d9-a507-9b57b95a7f3f"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * from BKNG WHERE BKNG_ID = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="6ed4c62e-7786-4153-ac42-83e1601680ac" name="Match content of [APNTMT_DT]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="7cf0bee9-a1b7-48b8-8768-fd1ad3bd757b" name="Match content of [BKNG_STS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/BKNG_STS_TYP_CDE[1]/text()</path><content>CHI</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="697f5cc3-ab3a-4470-b059-ea1aeeecbb85" name="Match content of [DOC_ID]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/DOC_ID[1]/text()</path><content>${Properties#ETS_APPOINTMENT_ID}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="03bb2bc3-b6b9-4bc4-985d-da2b7b80a93b" name="Match content of [SCR_RPT_STS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_TST_SCR_table" id="7dd7cdd2-9a78-4311-a3e5-ad4b7be2defd"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select TST_LVL_SCR_NAM,SRC_TST_SCR_ID,PST_ADM_SCR,MIN_SCR,MAX_SCR
+from tst_scr where bkng_id = ${Properties#BKNG_ID} ORDER BY TST_LVL_SCR_NAM ASC</con:query><con:assertion type="Simple NotContains" id="bf18bd5d-4402-4b03-b83a-db96cd6b3135" name="Not Contains-ToValidateTerminationType"><con:configuration><token>GRIGENQ2O00117000TSP002</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="XPath Match" id="4f5a74c5-1ae7-4b29-84f8-3d8ba8b05478" name="Match content of [ResultSet]"><con:configuration><path>//Results[1]/ResultSet[1]</path><content><![CDATA[<ResultSet fetchSize="10">
+  <Row rowNumber="1">
+    <TST_LVL_SCR_NAM>QNT00ENR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>020</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>13.5279</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="2">
+    <TST_LVL_SCR_NAM>QNT00NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>011</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>8</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="3">
+    <TST_LVL_SCR_NAM>QNT00OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>013</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="4">
+    <TST_LVL_SCR_NAM>QNT00RPT</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>023</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>136</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="5">
+    <TST_LVL_SCR_NAM>QNT00SCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>022</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>135.8935</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="6">
+    <TST_LVL_SCR_NAM>QNT00WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>012</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>32</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="7">
+    <TST_LVL_SCR_NAM>QNT01ANS</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>005</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>20</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="8">
+    <TST_LVL_SCR_NAM>QNT01NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>001</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="9">
+    <TST_LVL_SCR_NAM>QNT01NP</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>004</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="10">
+    <TST_LVL_SCR_NAM>QNT01OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>003</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="11">
+    <TST_LVL_SCR_NAM>QNT01WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>002</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>16</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="12">
+    <TST_LVL_SCR_NAM>QNT02ANS</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>010</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>20</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="13">
+    <TST_LVL_SCR_NAM>QNT02NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>006</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="14">
+    <TST_LVL_SCR_NAM>QNT02NP</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>009</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="15">
+    <TST_LVL_SCR_NAM>QNT02OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>008</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="16">
+    <TST_LVL_SCR_NAM>QNT02WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>007</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>16</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="17">
+    <TST_LVL_SCR_NAM>VBL00ENR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>050</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>14.0609</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="18">
+    <TST_LVL_SCR_NAM>VBL00NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>041</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>9</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="19">
+    <TST_LVL_SCR_NAM>VBL00OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>043</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="20">
+    <TST_LVL_SCR_NAM>VBL00RPT</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>053</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>140</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="21">
+    <TST_LVL_SCR_NAM>VBL00SCL</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>052</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>139.9658</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="22">
+    <TST_LVL_SCR_NAM>VBL00WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>042</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>31</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="23">
+    <TST_LVL_SCR_NAM>VBL01ANS</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>035</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>20</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="24">
+    <TST_LVL_SCR_NAM>VBL01NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>031</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>5</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="25">
+    <TST_LVL_SCR_NAM>VBL01NP</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>034</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="26">
+    <TST_LVL_SCR_NAM>VBL01OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>033</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="27">
+    <TST_LVL_SCR_NAM>VBL01WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>032</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>15</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="28">
+    <TST_LVL_SCR_NAM>VBL02ANS</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>040</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>20</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="29">
+    <TST_LVL_SCR_NAM>VBL02NC</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>036</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="30">
+    <TST_LVL_SCR_NAM>VBL02NP</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>039</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="31">
+    <TST_LVL_SCR_NAM>VBL02OM</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>038</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="32">
+    <TST_LVL_SCR_NAM>VBL02WR</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>037</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>16</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="33">
+    <TST_LVL_SCR_NAM>WRT00ARG</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>062</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>4.0000</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="34">
+    <TST_LVL_SCR_NAM>WRT00ISS</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>061</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>6.0000</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="35">
+    <TST_LVL_SCR_NAM>WRT00RPT</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>064</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>5.0</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+  <Row rowNumber="36">
+    <TST_LVL_SCR_NAM>WRT00TOT</TST_LVL_SCR_NAM>
+    <SRC_TST_SCR_ID>063</SRC_TST_SCR_ID>
+    <PST_ADM_SCR>5.0000</PST_ADM_SCR>
+    <MIN_SCR/>
+    <MAX_SCR/>
+  </Row>
+</ResultSet>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_ADTNL_FLD_table" id="3d55b912-b7d9-4d0a-b295-7a17b8a612b1"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT CLMN_NAM,CLMN_VAL
+FROM BKNG_ADTNL_FLD WHERE bkng_id = ${Properties#BKNG_ID}
+ORDER BY CLMN_NAM ASC</con:query><con:assertion type="XPath Match" id="985bc3e8-b337-4c99-8990-c9ee8a32b644" name="Match content of [ResultSet]"><con:configuration><path>//Results[1]/ResultSet[1]</path><content><![CDATA[<ResultSet fetchSize="10">
+  <Row rowNumber="1">
+    <CLMN_NAM>ADMINCODE</CLMN_NAM>
+    <CLMN_VAL>20160216A</CLMN_VAL>
+  </Row>
+  <Row rowNumber="2">
+    <CLMN_NAM>CANDIDATESCORESTATUS</CLMN_NAM>
+    <CLMN_VAL>RPTBL</CLMN_VAL>
+  </Row>
+  <Row rowNumber="3">
+    <CLMN_NAM>CTRID</CLMN_NAM>
+    <CLMN_VAL>${Properties#ETS_APPOINTMENT_ID}</CLMN_VAL>
+  </Row>
+  <Row rowNumber="4">
+    <CLMN_NAM>DATEOFBIRTH</CLMN_NAM>
+    <CLMN_VAL>07101990</CLMN_VAL>
+  </Row>
+  <Row rowNumber="5">
+    <CLMN_NAM>DELIVERYMODE</CLMN_NAM>
+    <CLMN_VAL>MST</CLMN_VAL>
+  </Row>
+  <Row rowNumber="6">
+    <CLMN_NAM>ETHNICITY</CLMN_NAM>
+    <CLMN_VAL>9900471069</CLMN_VAL>
+  </Row>
+  <Row rowNumber="7">
+    <CLMN_NAM>ETSTESTCENTERCOUNTRYCODE</CLMN_NAM>
+    <CLMN_VAL>592</CLMN_VAL>
+  </Row>
+  <Row rowNumber="8">
+    <CLMN_NAM>EXTRACTDATETIME</CLMN_NAM>
+    <CLMN_VAL>2016-04-29 10:02:30.349</CLMN_VAL>
+  </Row>
+  <Row rowNumber="9">
+    <CLMN_NAM>FIELDSCORECONFIGVERSION</CLMN_NAM>
+    <CLMN_VAL>20160216A.1</CLMN_VAL>
+  </Row>
+  <Row rowNumber="10">
+    <CLMN_NAM>ISOTESTCENTERCOUNTRYCODE</CLMN_NAM>
+    <CLMN_VAL>USA</CLMN_VAL>
+  </Row>
+  <Row rowNumber="11">
+    <CLMN_NAM>NONOPERATIONALCRCOUNTREPORTEDTORATINGSYSTEM</CLMN_NAM>
+    <CLMN_VAL>0</CLMN_VAL>
+  </Row>
+  <Row rowNumber="12">
+    <CLMN_NAM>OPERATIONALCRCOUNTREPORTEDTORATINGSYSTEM</CLMN_NAM>
+    <CLMN_VAL>2</CLMN_VAL>
+  </Row>
+  <Row rowNumber="13">
+    <CLMN_NAM>PROGRAMCODE</CLMN_NAM>
+    <CLMN_VAL>GRI</CLMN_VAL>
+  </Row>
+  <Row rowNumber="14">
+    <CLMN_NAM>REGISTRATIONSYSTEMID</CLMN_NAM>
+    <CLMN_VAL>ERS</CLMN_VAL>
+  </Row>
+  <Row rowNumber="15">
+    <CLMN_NAM>RESPONSECOUNT</CLMN_NAM>
+    <CLMN_VAL>1</CLMN_VAL>
+  </Row>
+  <Row rowNumber="16">
+    <CLMN_NAM>SCOREINDICATOR</CLMN_NAM>
+    <CLMN_VAL>1</CLMN_VAL>
+  </Row>
+  <Row rowNumber="17">
+    <CLMN_NAM>SUBFORM</CLMN_NAM>
+    <CLMN_VAL>100171-01-0000000001</CLMN_VAL>
+  </Row>
+  <Row rowNumber="18">
+    <CLMN_NAM>TESTCENTERADDRESSLINE1</CLMN_NAM>
+    <CLMN_VAL>Woodhall - D509</CLMN_VAL>
+  </Row>
+  <Row rowNumber="19">
+    <CLMN_NAM>TESTCENTERCITY</CLMN_NAM>
+    <CLMN_VAL>PRINCETON</CLMN_VAL>
+  </Row>
+  <Row rowNumber="20">
+    <CLMN_NAM>TESTCENTERCODE</CLMN_NAM>
+    <CLMN_VAL>APCN-9971</CLMN_VAL>
+  </Row>
+  <Row rowNumber="21">
+    <CLMN_NAM>TESTCENTERNAME</CLMN_NAM>
+    <CLMN_VAL>ETS LAB</CLMN_VAL>
+  </Row>
+  <Row rowNumber="22">
+    <CLMN_NAM>TESTCENTERPOSTALCODE</CLMN_NAM>
+    <CLMN_VAL>08541</CLMN_VAL>
+  </Row>
+  <Row rowNumber="23">
+    <CLMN_NAM>TESTCENTERSTATEPROVINCE</CLMN_NAM>
+    <CLMN_VAL>NJ</CLMN_VAL>
+  </Row>
+  <Row rowNumber="24">
+    <CLMN_NAM>TESTCENTERTIMEZONE</CLMN_NAM>
+    <CLMN_VAL>-4</CLMN_VAL>
+  </Row>
+  <Row rowNumber="25">
+    <CLMN_NAM>TESTCODE</CLMN_NAM>
+    <CLMN_VAL>GEN</CLMN_VAL>
+  </Row>
+  <Row rowNumber="26">
+    <CLMN_NAM>TESTDATE</CLMN_NAM>
+    <CLMN_VAL>2016-04-28T11:04:23.728-04:00</CLMN_VAL>
+  </Row>
+  <Row rowNumber="27">
+    <CLMN_NAM>TEST_PKG</CLMN_NAM>
+    <CLMN_VAL>GRIGENSTP00117000PKG001</CLMN_VAL>
+  </Row>
+</ResultSet>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="1ab9ebea-e768-44da-abe2-7ec62d9ba589" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>27</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_TST_SCR_XML_table" id="9091f313-dfdc-41ea-84b6-48f643002c30"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select TST_SCR_XML_TXT
+from TST_SCR_XML where bkng_id = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="1c938eb1-24b0-4831-b3ff-76f85cecc3ea" name="Match content of [TST_SCR_XML_TXT]"><con:configuration><path>(//Results[1]/ResultSet[1]/Row[1]/TST_SCR_XML_TXT[1]/text()) != ''</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="d5a0ece4-25b3-4e2c-9f44-8bea2f22b1f1" name="Match content of [TST_SCR_XML_TXT]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/TST_SCR_XML_TXT[1]/text()</path><content><![CDATA[<assessmentResult xmlns="ets_extended_imsqti_v2p1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:extcontext="http://eskm.ets.org/schema/extension_context" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ets_extended_imsqti_v2p1 ets_extended_imsqti_v2p1.xsd"> <context> <lip:identification xmlns:lip="http://www.imsglobal.org/xsd/imslip_v1p0"> <lip:contentype> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ProgramCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>GRI</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>GEN</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">RegistrationSystemId</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>ERS</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">CTRID</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>${Properties#ETS_APPOINTMENT_ID}</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">FieldScoreConfigVersion</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>20160216A.1</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestDate</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>2016-04-28T11:04:23.728-04:00</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>APCN-9971</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterName</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>ETS LAB</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterAddressLine1</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>Woodhall - D509</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterCity</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>PRINCETON</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterStateProvince</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>NJ</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ETSTestCenterCountryCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>592</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ISOTestCenterCountryCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>USA</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterPostalCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>08541</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TestCenterTimeZone</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>-4</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">AdminCode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>20160216A</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">Ethnicity</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>9900471069</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ResponseCount</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>1</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">TEST_PKG</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>GRIGENSTP00117000PKG001</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">SUBFORM</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>100171-01-0000000001</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">DeliveryMode</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>MST</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">OperationalCRCountReportedToRatingSystem</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>2</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">NonOperationalCRCountReportedToRatingSystem</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>0</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">CandidateScoreStatus</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>RPTBL</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ExtractDateTime</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>2016-04-29 10:02:30.349</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">ScoreIndicator</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>1</lip:fielddata> </lip:temporalfield> </lip:temporal> <lip:temporal> <lip:temporalfield> <lip:fieldlabel> <lip:typename> <lip:tyvalue xml:lang="en">DateOfBirth</lip:tyvalue> </lip:typename> </lip:fieldlabel> <lip:fielddata>07101990</lip:fielddata> </lip:temporalfield> </lip:temporal> </lip:contentype> <lip:ext_identification> <lip:address> <lip:pobox xml:lang="en"/> <lip:street/> <lip:city xml:lang="en">Plainsboro</lip:city> <lip:statepr xml:lang="en">NJ</lip:statepr> <lip:region xml:lang="en">592</lip:region> <lip:country xml:lang="en">USA</lip:country> <lip:postcode xml:lang="en">08536</lip:postcode> </lip:address> <lip:demographics> <lip:gender gender="M"/> </lip:demographics> </lip:ext_identification> </lip:identification> <extension_context> <designatedInstitutions> <extcontext:designatedInstitution> <extcontext:code>4837</extcontext:code> <extcontext:name>U CA Los Angeles</extcontext:name> <extcontext:department> <extcontext:code>0901</extcontext:code> <extcontext:name>Natural Sciences</extcontext:name> </extcontext:department> <extcontext:testsToReport> <extcontext:userSelection>GENREC</extcontext:userSelection> </extcontext:testsToReport> </extcontext:designatedInstitution> <extcontext:designatedInstitution> <extcontext:code>4007</extcontext:code> <extcontext:name>Arizona State U</extcontext:name> <extcontext:department> <extcontext:code>0999</extcontext:code> <extcontext:name>Natural Sciences -- Other</extcontext:name> </extcontext:department> <extcontext:testsToReport> <extcontext:userSelection>GEN</extcontext:userSelection> </extcontext:testsToReport> </extcontext:designatedInstitution> </designatedInstitutions> <attendingInstitution> <extcontext:code>3657</extcontext:code> <extcontext:name>New England Coll</extcontext:name> <extcontext:department> <extcontext:code>0999</extcontext:code> <extcontext:name>Natural Sciences -- Other</extcontext:name> </extcontext:department> <extcontext:testsToReport> <extcontext:userSelection>GEN</extcontext:userSelection> </extcontext:testsToReport> </attendingInstitution> <BIQs> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00001</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>3</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00003</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>9900471529</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00004</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>9900471473</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00005</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>9900471069</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00006</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>9900470130</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>GRE00016</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id>0901</extcontext:id> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>VE126100</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id/> </extcontext:response> </extcontext:responses> </extcontext:BIQ> <extcontext:BIQ> <extcontext:question> <extcontext:id>VE126101</extcontext:id> </extcontext:question> <extcontext:responses> <extcontext:response> <extcontext:id/> </extcontext:response> </extcontext:responses> </extcontext:BIQ> </BIQs> <itemsSentToRatingSystem> <extcontext:item>VC047822</extcontext:item> <extcontext:item>VC048273</extcontext:item> </itemsSentToRatingSystem> </extension_context> </context> <testResult identifier="20160216A"> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SESSION"> <value fieldIdentifier="GRIGENSTP00117000SES002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SUBFORM"> <value fieldIdentifier="100171-01-0000000001">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENW1O00117000TSP002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENQ1O00117000TSP002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENV1O00117000TSP002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENQ1V00062000TSP002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENV2O00117000TSP002">0</value> </outcomeVariable> <outcomeVariable identifier="TerminationType" cardinality="single" baseType="integer" interpretation="SECTION"> <value fieldIdentifier="GRIGENQ2O00117000TSP002">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00ENR"> <value fieldIdentifier="020">13.5279</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00NC"> <value fieldIdentifier="011">8</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00OM"> <value fieldIdentifier="013">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00RPT"> <value fieldIdentifier="023">136</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00SCL"> <value fieldIdentifier="022">135.8935</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT00WR"> <value fieldIdentifier="012">32</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT01ANS"> <value fieldIdentifier="005">20</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT01NC"> <value fieldIdentifier="001">4</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT01NP"> <value fieldIdentifier="004">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT01OM"> <value fieldIdentifier="003">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT01WR"> <value fieldIdentifier="002">16</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT02ANS"> <value fieldIdentifier="010">20</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT02NC"> <value fieldIdentifier="006">4</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT02NP"> <value fieldIdentifier="009">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT02OM"> <value fieldIdentifier="008">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="QNT02WR"> <value fieldIdentifier="007">16</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00ENR"> <value fieldIdentifier="050">14.0609</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00NC"> <value fieldIdentifier="041">9</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00OM"> <value fieldIdentifier="043">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00RPT"> <value fieldIdentifier="053">140</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00SCL"> <value fieldIdentifier="052">139.9658</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL00WR"> <value fieldIdentifier="042">31</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL01ANS"> <value fieldIdentifier="035">20</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL01NC"> <value fieldIdentifier="031">5</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL01NP"> <value fieldIdentifier="034">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL01OM"> <value fieldIdentifier="033">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL01WR"> <value fieldIdentifier="032">15</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL02ANS"> <value fieldIdentifier="040">20</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL02NC"> <value fieldIdentifier="036">4</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL02NP"> <value fieldIdentifier="039">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL02OM"> <value fieldIdentifier="038">0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="VBL02WR"> <value fieldIdentifier="037">16</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="WRT00ARG"> <value fieldIdentifier="062">4.0000</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="WRT00ISS"> <value fieldIdentifier="061">6.0000</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="WRT00RPT"> <value fieldIdentifier="064">5.0</value> </outcomeVariable> <outcomeVariable cardinality="single" baseType="float" identifier="WRT00TOT"> <value fieldIdentifier="063">5.0000</value> </outcomeVariable> </testResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC047822" sequenceIndex="1"> <outcomeVariable identifier="crRatings" cardinality="multiple"> <rater identifier="11000" code="E"> <dimension> <value fieldIdentifier="DimensionCode">SC</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">06</value> </dimension> </rater> <rater identifier="11001" code="F"> <dimension> <value fieldIdentifier="DimensionCode">SC</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">06</value> </dimension> </rater> </outcomeVariable> <templateVariable identifier="AgreementSample" cardinality="single"> <value>No</value> </templateVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>6.0000</value> </outcomeVariable> <templateVariable identifier="EssayEntryMode" cardinality="single" baseType="integer"> <value>1</value> </templateVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC048273" sequenceIndex="2"> <outcomeVariable identifier="crRatings" cardinality="multiple"> <rater identifier="11000" code="E"> <dimension> <value fieldIdentifier="DimensionCode">PR</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> <dimension> <value fieldIdentifier="DimensionCode">LAN</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> <dimension> <value fieldIdentifier="DimensionCode">IN</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> </rater> <rater identifier="11001" code="F"> <dimension> <value fieldIdentifier="DimensionCode">LAN</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> <dimension> <value fieldIdentifier="DimensionCode">PR</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> <dimension> <value fieldIdentifier="DimensionCode">IN</value> <value fieldIdentifier="ScoreResultType">E</value> <value fieldIdentifier="Rating">04</value> </dimension> </rater> </outcomeVariable> <templateVariable identifier="AgreementSample" cardinality="single"> <value>No</value> </templateVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>4.0000</value> </outcomeVariable> <templateVariable identifier="EssayEntryMode" cardinality="single" baseType="integer"> <value>1</value> </templateVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB329493" sequenceIndex="1"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB448181" sequenceIndex="2"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC088919" sequenceIndex="3"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB101014" sequenceIndex="4"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="LB002917" sequenceIndex="5"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DM001196" sequenceIndex="6"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB302504" sequenceIndex="7"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB307413" sequenceIndex="8"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB449416" sequenceIndex="9"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DM001618" sequenceIndex="10"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE658353" sequenceIndex="11"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF388455" sequenceIndex="12"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF090481" sequenceIndex="13"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143852" sequenceIndex="14"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143851" sequenceIndex="15"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB143853" sequenceIndex="16"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB156232" sequenceIndex="17"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB443909" sequenceIndex="18"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC431066" sequenceIndex="19"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC183092" sequenceIndex="20"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>56</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB519533" sequenceIndex="1"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="UM100020" sequenceIndex="2"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC046299" sequenceIndex="3"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF455760" sequenceIndex="4"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF236851" sequenceIndex="5"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH045959" sequenceIndex="6"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC154922" sequenceIndex="7"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC154921" sequenceIndex="8"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336106" sequenceIndex="9"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336107" sequenceIndex="10"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336104" sequenceIndex="11"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB336108" sequenceIndex="12"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE753062" sequenceIndex="13"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VF094492" sequenceIndex="14"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC143542" sequenceIndex="15"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>5</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC054698" sequenceIndex="16"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="AK003595" sequenceIndex="17"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>5</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352714" sequenceIndex="18"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>5</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352713" sequenceIndex="19"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB352716" sequenceIndex="20"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DG000055" sequenceIndex="1"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="LB001473" sequenceIndex="2"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB199885" sequenceIndex="3"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB329083" sequenceIndex="4"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB355530" sequenceIndex="5"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB445440" sequenceIndex="6"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH356094" sequenceIndex="7"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH337620" sequenceIndex="8"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB196565" sequenceIndex="9"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>5</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB165543" sequenceIndex="10"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH278991" sequenceIndex="11"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH245248" sequenceIndex="12"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH212568" sequenceIndex="13"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750903" sequenceIndex="14"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750904" sequenceIndex="15"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE750906" sequenceIndex="16"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>67</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH316822" sequenceIndex="17"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>6</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH316574" sequenceIndex="18"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE342657" sequenceIndex="19"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VH188493" sequenceIndex="20"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>78</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298128" sequenceIndex="1"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC398383" sequenceIndex="2"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC213348" sequenceIndex="3"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB601424" sequenceIndex="4"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB539427" sequenceIndex="5"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE613905" sequenceIndex="6"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC078597" sequenceIndex="7"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC078599" sequenceIndex="8"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC297814" sequenceIndex="9"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298060" sequenceIndex="10"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC298058" sequenceIndex="11"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC051973" sequenceIndex="12"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC049969" sequenceIndex="13"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC167897" sequenceIndex="14"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC052905" sequenceIndex="15"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB172121" sequenceIndex="16"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE586787" sequenceIndex="17"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE586785" sequenceIndex="18"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC156998" sequenceIndex="19"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC168835" sequenceIndex="20"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC306879" sequenceIndex="1"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC393286" sequenceIndex="2"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC030093" sequenceIndex="3"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC305289" sequenceIndex="4"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB179851" sequenceIndex="5"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VC361429" sequenceIndex="6"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB343579" sequenceIndex="7"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB305308" sequenceIndex="8"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB179378" sequenceIndex="9"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB445422" sequenceIndex="10"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>5</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC030034" sequenceIndex="11"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB506722" sequenceIndex="12"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DC031212" sequenceIndex="13"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>1</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003532" sequenceIndex="14"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>1</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003534" sequenceIndex="15"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="DQ003533" sequenceIndex="16"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB614590" sequenceIndex="17"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>3</value> </candidateResponse> </responseVariable> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="multiple"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="UB100887" sequenceIndex="18"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>2</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VE616950" sequenceIndex="19"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>4</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.00</value> </outcomeVariable> </itemResult> <itemResult sessionStatus="final" datestamp="0001-01-01T00:00:00Z" identifier="VB613872" sequenceIndex="20"> <responseVariable identifier="CandidateResponse" baseType="integer" cardinality="single"> <candidateResponse> <value>9</value> </candidateResponse> </responseVariable> <outcomeVariable identifier="EditCode" cardinality="single" baseType="integer"> <value>0</value> </outcomeVariable> <outcomeVariable identifier="Score" cardinality="single" baseType="integer"> <value>0.0</value> </outcomeVariable> </itemResult> </assessmentResult>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_ANLYS_RSLT_table" id="fdd3ec3e-56d5-4a2b-bf43-e37117bd15e1"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select *
+from BKNG_ANLYS_RSLT where bkng_id = ${Properties#BKNG_ID}</con:query><con:assertion type="XPath Match" id="ffc57e3b-434e-4459-beac-392e4916d0fc" name="Match content of [BKNG_ANLYS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/BKNG_ANLYS_TYP_CDE[1]/text()</path><content>LSDRDY</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_ORG_SLCTN_Table" id="3db22fc8-da94-4717-a445-88906c47ed81"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM BKNG_ORG_SLCTN where bkng_id = ${Properties#BKNG_ID} ORDER BY DATE_CREATED DESC</con:query><con:assertion type="XPath Match" id="d2c2d0c3-c547-4f14-86b0-9c36bf5ca9cb" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)>=3</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_SCR_RPT_STGNG_Table" id="4a1b20c9-0a17-4815-a306-120701467932"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM BKNG_SCR_RPT_STGNG where bkng_id = ${Properties#BKNG_ID} ORDER BY DATE_CREATED DESC</con:query><con:assertion type="XPath Match" id="84da0a08-7fa3-4df8-acf9-ff1888e5f912" name="Match content of [PGM_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/PGM_CDE[1]/text()</path><content>GRI</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4989ef43-7050-4029-b3d5-307536a1bf7e" name="Match content of [SCR_RPT_STS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_STS_CDE[1]/text()</path><content>NEW</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4fc4c510-59f1-4694-9e07-b2f7da5b1f17" name="Match content of [SCR_RPT_EXTRCT_STS_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SCR_RPT_EXTRCT_STS_TYP_CDE[1]/text()</path><content>RDPRC</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_DMGRPH_RSP_table" id="3cf01a60-3e6f-43ca-8ffa-c9ee86eccee5" disabled="true"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select *
+from CUST_DMGRPH_RSP WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM BLC_CUSTOMER WHERE FIRST_NAME IN (SELECT CUST_FST_NAM FROM BKNG WHERE BKNG_ID= '${Properties#BKNG_ID}')) </con:query><con:assertion type="XPath Match" id="8e62eafa-5e41-4d8f-bc7b-f3dc701b8899" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)>=2</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="a0df9f9b-2161-4951-bffe-86ca1aaaaaa5" name="Match content of [DMGRPH_QSTN_NO]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/DMGRPH_QSTN_NO[1]/text()</path><content>9900470103</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="6db2cceb-ed49-4a23-8c64-080c9afc6ec1" name="Match content of [DMGRPH_RSP_NO]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/DMGRPH_RSP_NO[1]/text()</path><content>9900470291</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4fa60b3d-188e-41e0-b3bf-ebd2fdd04ae6" name="Match content of [DMGRPH_QSTN_NO]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[2]/DMGRPH_QSTN_NO[1]/text()</path><content>9900470116</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4f16ea3a-1c57-45f2-93d8-85172553533f" name="Match content of [DMGRPH_RSP_NO]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[2]/DMGRPH_RSP_NO[1]/text()</path><content>9900470132</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_CUST_DMGRPH_RSP_table" id="47501d8e-3e8b-4dc0-bbac-f781d109f0f1"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>select *
+from CUST_DMGRPH_RSP WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM BLC_CUSTOMER WHERE FIRST_NAME IN (SELECT CUST_FST_NAM FROM BKNG WHERE BKNG_ID= '${Properties#BKNG_ID}')) </con:query><con:assertion type="XPath Match" id="43a7d8f7-0c41-4529-9ac3-0eca6d6a9ae8" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)>=2</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="groovy" name="cleanUpData" id="d2819d13-0681-4015-94fb-0df29a34dd47"><con:settings/><con:config><script>import cleanup.ScoreLoadService;
+ScoreLoadService CleanData = new ScoreLoadService(testRunner.testCase.testSuite.project.activeEnvironment.name);
+
+log.info CleanData.removeNewScores(context.expand( '${Properties#BKNG_ID}' ).toInteger());
+</script></con:config></con:testStep><con:tearDownScript>
+
+
+</con:tearDownScript><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>61d648b0-59ac-4a50-8ad9-b54144e387a0</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4a0a6626-16d2-4807-a3b9-ae854701e527</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>eddb6d72-1a57-467b-a592-6191005e470f</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>e0da01b3-5c6f-42d3-b933-c8cce9b0242b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>4e2a550f-1786-447c-a682-1f54ce556ae0</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c6ad476f-b346-497e-a98c-c401afef9fbf</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>10ded3f5-6f64-4170-96c7-4e2b2ef49915</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>d88fdb25-b9b9-403a-8c84-c3931ae93380</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8556791f-1df0-4cea-97d8-3af1e2e13b54</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>05e3f325-6232-412a-9bea-b99091dfe727</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="8813140e-773e-4e32-a9f2-19bbe1b757d6"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="c5f2be6e-96f6-4f7b-8c06-9027807d55b3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="5c76c1c8-0b52-4c16-a576-30e5ec0e03e3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="3c247fad-11ea-48df-9244-ccc1c452c36f"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

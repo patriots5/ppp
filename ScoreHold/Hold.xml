@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="ScoreHoldRelease" path="/ereg-appointment-service/rest/score/hold" id="40c3a5d2-950a-4f81-9a96-d21eafc81776" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="40c3a5d2-950a-4f81-9a96-d21eafc81776fileName">Hold</con:setting></con:settings><con:parameters/><con:method name="Hold" id="f4d90f83-8ee6-429b-9d35-f2d7af4df295" method="POST"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400 500</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>503</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="72c33481-1699-48b1-9571-f86468143830" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="password" value="1qaz@WSX"/>
+  <con:entry key="SourceSystemId" value="ERS"/>
+  <con:entry key="username" value="Intsyseregdvi"/>
+  <con:entry key="Content-Type" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>https://v2-appointment-dev.ereg.ets.org</con:endpoint><con:request>{
+    "sourceSystemId":"ERS",
+    "appointmentIdList":[
+        {
+            "appointmentId":"8429707170020564",
+            "regSysId":"ERS"
+        }
+    ],
+    "requestType":"HLDNN",
+    "reasonType":"SEC",
+    "comment":"Test Hold"
+
+}
+</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:method><con:method name="Release" id="f4d90f83-8ee6-429b-9d35-f2d7af4df295" method="PUT"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Fault</con:element></con:representation><con:request name="Request 1" id="72c33481-1699-48b1-9571-f86468143830" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="password" value="1qaz@WSX"/>
+  <con:entry key="SourceSystemId" value="ERS"/>
+  <con:entry key="username" value="Intsyseregdvi"/>
+  <con:entry key="Content-Type" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>https://v2-appointment-dev.ereg.ets.org</con:endpoint><con:request>{
+    "sourceSystemId":"ERS",
+    "appointmentIdList":[
+        {
+            "appointmentId":"8429707170020564",
+            "regSysId":"ERS"
+        }
+    ],
+    "requestType":"RLSFR",
+    "reasonType":"SEC",
+    "comment":"Test Release"
+
+}
+</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:method><con:method name="Cancel" id="f4d90f83-8ee6-429b-9d35-f2d7af4df295" method="PUT"><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:hold="https://v2-appointment-dev.ereg.ets.org/ereg-appointment-service/rest/score/hold">hold:Fault</con:element></con:representation><con:request name="Request 1" id="72c33481-1699-48b1-9571-f86468143830" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="password" value="1qaz@WSX"/>
+  <con:entry key="SourceSystemId" value="ERS"/>
+  <con:entry key="username" value="Intsyseregdvi"/>
+  <con:entry key="Content-Type" value="application/json"/>
+</xml-fragment>]]></con:setting></con:settings><con:endpoint>https://v2-appointment-dev.ereg.ets.org</con:endpoint><con:request>{
+    "sourceSystemId":"ERS",
+    "appointmentIdList":[
+        {
+            "appointmentId":"8429707170020564",
+            "regSysId":"ERS"
+        }
+    ],
+    "requestType":"HLDNN",
+    "reasonType":"SEC",
+    "comment":"Test Hold"
+
+}
+</con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:method><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:resource>

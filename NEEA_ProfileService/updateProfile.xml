@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:operation id="b6645799-6c71-4834-8b96-d36d215ea824" isOneWay="false" action="" name="updateProfile" bindingOperationName="updateProfile" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="b6645799-6c71-4834-8b96-d36d215ea824fileName">updateProfile</con:setting></con:settings><con:call id="f01e88cc-c951-4df8-b6ff-0486a3f095bd" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaprofileservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices" xmlns:sch="http://ereg.ets.org/external/service/soap/neea/profile/schemas" xmlns:sch1="http://ereg.ets.org/external/service/soap/neea/schema">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <thir:updateProfileRequest>\r
+         <requestHeader>\r
+            <!--Optional:-->\r
+            <informationCategory>\r
+               <classificationCode>?</classificationCode>\r
+               <classificationMessage>?</classificationMessage>\r
+            </informationCategory>\r
+            <clientTransactionId>\r
+               <id>?</id>\r
+               <!--Optional:-->\r
+               <guid>?</guid>\r
+            </clientTransactionId>\r
+            <requestTime>?</requestTime>\r
+            <!--Optional:-->\r
+            <batchid>\r
+               <id>?</id>\r
+               <!--Optional:-->\r
+               <guid>?</guid>\r
+            </batchid>\r
+            <!--Optional:-->\r
+            <sessionid>\r
+               <id>?</id>\r
+               <!--Optional:-->\r
+               <guid>?</guid>\r
+            </sessionid>\r
+            <!--Optional:-->\r
+            <action>?</action>\r
+            <source>?</source>\r
+            <programCode>?</programCode>\r
+            <!--Optional:-->\r
+            <accountingDate>?</accountingDate>\r
+            <!--Optional:-->\r
+            <requestsData>\r
+               <!--1 or more repetitions:-->\r
+               <request>\r
+                  <name>?</name>\r
+                  <data>\r
+                     <!--You have a CHOICE of the next 7 items at this level-->\r
+                     <string>?</string>\r
+                     <duration>?</duration>\r
+                     <integer>?</integer>\r
+                     <float>?</float>\r
+                     <dateTime>?</dateTime>\r
+                     <date>?</date>\r
+                     <time>?</time>\r
+                  </data>\r
+               </request>\r
+            </requestsData>\r
+            <accountingValue>?</accountingValue>\r
+            <eventDate>?</eventDate>\r
+         </requestHeader>\r
+         <profile>\r
+            <sch1:dateOfBirth>?</sch1:dateOfBirth>\r
+            <sch1:gender>?</sch1:gender>\r
+            <sch1:lastName>?</sch1:lastName>\r
+            <!--Optional:-->\r
+            <sch1:firstName>?</sch1:firstName>\r
+            <!--Optional:-->\r
+            <sch1:middleName>?</sch1:middleName>\r
+            <!--Optional:-->\r
+            <sch1:prefix>?</sch1:prefix>\r
+            <!--Optional:-->\r
+            <sch1:suffix>?</sch1:suffix>\r
+            <!--Zero or more repetitions:-->\r
+            <sch1:address>\r
+               <type>?</type>\r
+               <addressLine1>?</addressLine1>\r
+               <!--Optional:-->\r
+               <addressLine2>?</addressLine2>\r
+               <!--Optional:-->\r
+               <addressLine3>?</addressLine3>\r
+               <!--Optional:-->\r
+               <addressLine4>?</addressLine4>\r
+               <city>?</city>\r
+               <country>?</country>\r
+               <!--Optional:-->\r
+               <provinceAndPostalCode>\r
+                  <!--You have a CHOICE of the next 2 items at this level-->\r
+                  <!--Optional:-->\r
+                  <usCanPostal>\r
+                     <UsCanProvince>?</UsCanProvince>\r
+                     <postalCode>?</postalCode>\r
+                  </usCanPostal>\r
+                  <!--Optional:-->\r
+                  <otherPostal>\r
+                     <!--Optional:-->\r
+                     <otherProvince>?</otherProvince>\r
+                     <!--Optional:-->\r
+                     <otherPostalCode>?</otherPostalCode>\r
+                  </otherPostal>\r
+               </provinceAndPostalCode>\r
+               <!--0 to 2 repetitions:-->\r
+               <primaryPhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>?</countryISDCode>\r
+                  <phoneNumber>?</phoneNumber>\r
+                  <!--Optional:-->\r
+                  <phoneExtension>?</phoneExtension>\r
+               </primaryPhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <alternatePhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>?</countryISDCode>\r
+                  <phoneNumber>?</phoneNumber>\r
+                  <!--Optional:-->\r
+                  <phoneExtension>?</phoneExtension>\r
+               </alternatePhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <faxPhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>?</countryISDCode>\r
+                  <faxNumber>?</faxNumber>\r
+               </faxPhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <emailAddress>?</emailAddress>\r
+               <!--Optional:-->\r
+               <mailingLabel>cid:994727606186</mailingLabel>\r
+            </sch1:address>\r
+            <!--1 or more repetitions:-->\r
+            <sch1:govermentIDs>\r
+               <sch1:type>?</sch1:type>\r
+               <sch1:value>?</sch1:value>\r
+               <sch1:issuingCountryCode>?</sch1:issuingCountryCode>\r
+               <!--Optional:-->\r
+               <sch1:stateCode>?</sch1:stateCode>\r
+            </sch1:govermentIDs>\r
+            <sch1:contactPreference>2</sch1:contactPreference>\r
+            <sch1:validForMarketing>false</sch1:validForMarketing>\r
+            <sch1:nativeLanguage>?</sch1:nativeLanguage>\r
+            <sch1:nativeCountry>?</sch1:nativeCountry>\r
+            <!--Zero or more repetitions:-->\r
+            <sch1:accommodations>\r
+               <sch1:startDate>?</sch1:startDate>\r
+               <sch1:endDate>?</sch1:endDate>\r
+               <sch1:accommodationStatus>false</sch1:accommodationStatus>\r
+               <sch1:accommodationCode>?</sch1:accommodationCode>\r
+               <!--Optional:-->\r
+               <sch1:comments>?</sch1:comments>\r
+               <!--Zero or more repetitions:-->\r
+               <sch1:additionalParameters>\r
+                  <name>?</name>\r
+                  <data>\r
+                     <!--You have a CHOICE of the next 7 items at this level-->\r
+                     <string>?</string>\r
+                     <duration>?</duration>\r
+                     <integer>?</integer>\r
+                     <float>?</float>\r
+                     <dateTime>?</dateTime>\r
+                     <date>?</date>\r
+                     <time>?</time>\r
+                  </data>\r
+               </sch1:additionalParameters>\r
+            </sch1:accommodations>\r
+            <!--Zero or more repetitions:-->\r
+            <sch1:hobson>\r
+               <sch1:questionSetID>?</sch1:questionSetID>\r
+               <sch1:questionID>?</sch1:questionID>\r
+               <sch1:questionResponse>\r
+                  <!--You have a CHOICE of the next 2 items at this level-->\r
+                  <!--1 or more repetitions:-->\r
+                  <sch1:id>?</sch1:id>\r
+                  <sch1:text>?</sch1:text>\r
+               </sch1:questionResponse>\r
+            </sch1:hobson>\r
+            <sch1:LastModified>?</sch1:LastModified>\r
+            <!--Optional:-->\r
+            <sch1:searchServiceOptInStatus>?</sch1:searchServiceOptInStatus>\r
+         </profile>\r
+         <thirdPartyProfileID>?</thirdPartyProfileID>\r
+         <etsProfileID>?</etsProfileID>\r
+      </thir:updateProfileRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices/ThirdPartyProfileServicesPort/updateProfileRequest"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:call><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:operation>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:operation id="9d36b28b-656e-4a4b-a136-6b70b23b648a" isOneWay="false" action="" name="createProfile" bindingOperationName="createProfile" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="9d36b28b-656e-4a4b-a136-6b70b23b648afileName">createProfile</con:setting></con:settings><con:call id="5aa1fbd6-a467-4690-b506-8d9138512ff8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaprofileservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices" xmlns:sch="http://ereg.ets.org/external/service/soap/neea/profile/schemas">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <thir:createProfileRequest>\r
+         <requestHeader>\r
+            <!--Optional:-->\r
+            <informationCategory>\r
+               <classificationCode>01</classificationCode>\r
+               <classificationMessage/>\r
+            </informationCategory>\r
+            <clientTransactionId>\r
+               <id>2</id>\r
+               <!--Optional:-->\r
+               <guid/>\r
+            </clientTransactionId>\r
+            <requestTime>2016-08-30T12:03:04.938+08:00</requestTime>\r
+            <!--Optional:-->\r
+            <batchid>\r
+               <id>1116669999</id>\r
+               <!--Optional:-->\r
+               <guid>?</guid>\r
+            </batchid>\r
+            <!--Optional:-->\r
+            <sessionid>\r
+               <id>1119999</id>\r
+               <!--Optional:-->\r
+               <guid/>\r
+            </sessionid>\r
+            <!--Optional:-->\r
+            <action>Profile.CreateProfile</action>\r
+            <source>NEEA</source>\r
+            <programCode>TEL</programCode>\r
+            <!--Optional:-->\r
+            <accountingDate>2016-08-30</accountingDate>\r
+            <!--Optional:-->\r
+            <requestsData>\r
+               <!--1 or more repetitions:-->\r
+               <request>\r
+                  <name>citizenshipCountry</name>\r
+                  <data>\r
+                     <!--You have a CHOICE of the next 7 items at this level-->\r
+                     <string>CHN</string>\r
+                  </data>\r
+               </request>\r
+            </requestsData>\r
+            <accountingValue>11160730122</accountingValue>\r
+            <eventDate>2016-08-30T12:03:04.938+08:00</eventDate>\r
+         </requestHeader>\r
+         <profile>\r
+            <sch:dateOfBirth>1980-10-09</sch:dateOfBirth>\r
+            <sch:gender>M</sch:gender>\r
+            <sch:lastName>zxcvtest</sch:lastName>\r
+            <!--Optional:-->\r
+            <sch:firstName>asdftest</sch:firstName>\r
+            <!--Optional:-->\r
+            <sch:middleName>q</sch:middleName>\r
+            <!--Optional:-->\r
+            <sch:prefix>Mr.</sch:prefix>\r
+            <!--Optional:-->\r
+            <sch:suffix>Jr.</sch:suffix>\r
+            <!--Zero or more repetitions:-->\r
+            <sch:address>\r
+               <type>Primary</type>\r
+               <addressLine1>999 Reith Center</addressLine1>\r
+               <!--Optional:-->\r
+               <addressLine2>No.9030 North</addressLine2>\r
+               <city>Shenzhen</city>\r
+               <country>CHN</country>\r
+               <!--Optional:-->\r
+               <provinceAndPostalCode>\r
+
+                  <otherPostal>\r
+                     <!--Optional:-->\r
+                     <otherProvince>Guangdong</otherProvince>\r
+                     <!--Optional:-->\r
+                     <otherPostalCode>518053</otherPostalCode>\r
+                  </otherPostal>\r
+               </provinceAndPostalCode>\r
+               <!--0 to 2 repetitions:-->\r
+               <primaryPhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>86</countryISDCode>\r
+                  <phoneNumber>1009111009</phoneNumber>\r
+                  <!--Optional:-->\r
+                  <phoneExtension>11009</phoneExtension>\r
+               </primaryPhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <alternatePhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>86</countryISDCode>\r
+                  <phoneNumber>1009221009</phoneNumber>\r
+                  <!--Optional:-->\r
+                  <phoneExtension>21009</phoneExtension>\r
+               </alternatePhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <faxPhone>\r
+                  <!--Optional:-->\r
+                  <countryISDCode>86</countryISDCode>\r
+                  <faxNumber>1009331009</faxNumber>\r
+               </faxPhone>\r
+               <!--0 to 2 repetitions:-->\r
+               <emailAddress>zxcv@mail.com</emailAddress>\r
+               <!--Optional:-->\r
+               <mailingLabel>NTE4</mailingLabel>\r
+            </sch:address>\r
+            <!--1 or more repetitions:-->\r
+<!--            <sch:govermentIDs>\r-->
+<!--               <sch:type>?</sch:type>\r-->
+<!--               <sch:value>?</sch:value>\r-->
+<!--               <sch:issuingCountryCode>?</sch:issuingCountryCode>\r-->
+<!--               <!--Optional:-->\r-->
+<!--               <sch:stateCode>?</sch:stateCode>\r-->
+<!--            </sch:govermentIDs>\r-->
+            <sch:contactPreference>1</sch:contactPreference>\r
+            <sch:validForMarketing>false</sch:validForMarketing>\r
+            <sch:nativeLanguage>chi</sch:nativeLanguage>\r
+            <sch:nativeCountry>CHN</sch:nativeCountry>\r
+     
+            <sch:LastModified>2016-08-30T11:49:25.000+08:00</sch:LastModified>\r
+            <!--Optional:-->\r
+            <sch:searchServiceOptInStatus>N</sch:searchServiceOptInStatus>\r
+         </profile>\r
+         <thirdPartyProfileID>20170999Z1</thirdPartyProfileID>\r
+      </thir:createProfileRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices/ThirdPartyProfileServicesPort/createProfileRequest"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:call><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:operation>

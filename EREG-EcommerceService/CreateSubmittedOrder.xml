@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="CreateSubmittedOrder" path="/ereg-ecommerce-service/rest/order/createSubmittedOrder" id="0b8b2cdb-51a1-4742-9bf6-093b7650b552" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="0b8b2cdb-51a1-4742-9bf6-093b7650b552fileName">CreateSubmittedOrder</con:setting></con:settings><con:parameters/><con:method name="CreateSubmittedOrder" id="999f3649-93df-4669-b11f-fe1af59fdab6" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:cre="https://v2-ecommerceext-dev.ereg.ets.org/ereg-ecommerce-service/rest/order/createSubmittedOrder">cre:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="b8d48d03-6785-4792-be4d-15e2a7c223a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="password" value="1qaz@WSX"/>
+  <con:entry key="clientId" value="WEB"/>
+  <con:entry key="Accept" value="application/json "/>
+  <con:entry key="programCode" value="TEL"/>
+  <con:entry key="sourceSystemId" value="ERS"/>
+  <con:entry key="username" value="Intsyseregdvi"/>
+  <con:entry key="Content-Type" value="application/json "/>
+</xml-fragment>]]></con:setting></con:settings><con:request>{
+	"schedulingSOAMessage": {
+		"requestHeader": {
+			"informationCategory": {
+				"classificationCode": "01",
+				"classificationMessage": ""
+			},
+			"clientTransactionId": {
+				"id": "079",
+				"guid": null
+			},
+			"requestTime": 1517875508968,
+			"batchid": {
+				"id": "2117032712",
+				"guid": null
+			},
+			"sessionid": {
+				"id": "15334987",
+				"guid": null
+			},
+			"action": "Order.CreateOrder",
+			"source": "NEA",
+			"programCode": "TEL",
+			"accountingDate": 1511672400000,
+			"requestsData": {
+				"request": [{
+					"name": "lateRegistrationFlag",
+					"data": {
+						"string": "false",
+						"duration": null,
+						"integer": null,
+						"dateTime": null,
+						"date": null,
+						"time": null,
+						"float": null
+					}
+				}]
+			},
+			"accountingValue": "2117032712-29",
+			"eventDate": 1517789108350
+		},
+		"responseHeader": null,
+		"booking": {
+			"etsProfileID": "",
+			"thirdPartyProfileID": "20180206474paea",
+			"vpExpiresOn": null,
+			"priorETSAppointmentID": null,
+			"etsAppointmentID": null,
+			"priorThirdPartyAppointmentID": null,
+			"thirdPartyAppointmentID": "201802064749",
+			"test": {
+				"programCode": "TEL",
+				"examID": "XML"
+			},
+			"slots": {
+				"slot": [{
+					"siteCode": "STNNEEA",
+					"labCode": null,
+					"seatCode": null,
+					"startTime": "2018-01-30T23:45:00.000+08:00",
+					"adminAnchorDateTime": null,
+					"adminID": "20180130A",
+					"duration": null
+				}]
+			},
+			"feeWaivedFlag": false,
+			"searchServiceOptInStatus": "Y"
+		},
+		"officialDIList": [],
+		"unOfficialDIList": [],
+		"dqResponses": [{
+			"questionSetID": 27,
+			"questionID": 23,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 24,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 25,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 11,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 12,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 13,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		}],
+		"valuePack": null,
+		"govermentIDs": [{
+			"type": "International ID",
+			"value": "20180206474paea12",
+			"issuingCountryCode": "CHN",
+			"stateCode": null
+		}],
+		"additionalProducts": null,
+		"rescoreProducts": null,
+		"biqListVo": {
+			"testTime": 1517922347248,
+			"testId": null,
+			"biqUserResponseList": [{
+				"questionCode": "23",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "24",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "25",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "11",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "12",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "13",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			}]
+		},
+		"dqresponses": [{
+			"questionSetID": 27,
+			"questionID": 23,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 24,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 25,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 11,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 12,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 13,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		}]
+	}
+}
+	</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method><con:method name="CreateSubmittedOrder-PUT" id="999f3649-93df-4669-b11f-fe1af59fdab6" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:cre="https://v2-ecommerceext-dev.ereg.ets.org/ereg-ecommerce-service/rest/order/createSubmittedOrder">cre:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="b8d48d03-6785-4792-be4d-15e2a7c223a2" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="password" value="1qaz@WSX"/>
+  <con:entry key="clientId" value="WEB"/>
+  <con:entry key="Accept" value="application/json "/>
+  <con:entry key="programCode" value="TEL"/>
+  <con:entry key="sourceSystemId" value="ERS"/>
+  <con:entry key="username" value="Intsyseregdvi"/>
+  <con:entry key="Content-Type" value="application/json "/>
+</xml-fragment>]]></con:setting></con:settings><con:request>{
+	"schedulingSOAMessage": {
+		"requestHeader": {
+			"informationCategory": {
+				"classificationCode": "01",
+				"classificationMessage": ""
+			},
+			"clientTransactionId": {
+				"id": "079",
+				"guid": null
+			},
+			"requestTime": 1517875508968,
+			"batchid": {
+				"id": "2117032712",
+				"guid": null
+			},
+			"sessionid": {
+				"id": "15334987",
+				"guid": null
+			},
+			"action": "Order.CreateOrder",
+			"source": "NEA",
+			"programCode": "TEL",
+			"accountingDate": 1511672400000,
+			"requestsData": {
+				"request": [{
+					"name": "lateRegistrationFlag",
+					"data": {
+						"string": "false",
+						"duration": null,
+						"integer": null,
+						"dateTime": null,
+						"date": null,
+						"time": null,
+						"float": null
+					}
+				}]
+			},
+			"accountingValue": "2117032712-29",
+			"eventDate": 1517789108350
+		},
+		"responseHeader": null,
+		"booking": {
+			"etsProfileID": "",
+			"thirdPartyProfileID": "20180206474paea",
+			"vpExpiresOn": null,
+			"priorETSAppointmentID": null,
+			"etsAppointmentID": null,
+			"priorThirdPartyAppointmentID": null,
+			"thirdPartyAppointmentID": "201802064749",
+			"test": {
+				"programCode": "TEL",
+				"examID": "XML"
+			},
+			"slots": {
+				"slot": [{
+					"siteCode": "STNNEEA",
+					"labCode": null,
+					"seatCode": null,
+					"startTime": "2018-01-30T23:45:00.000+08:00",
+					"adminAnchorDateTime": null,
+					"adminID": "20180130A",
+					"duration": null
+				}]
+			},
+			"feeWaivedFlag": false,
+			"searchServiceOptInStatus": "Y"
+		},
+		"officialDIList": [],
+		"unOfficialDIList": [],
+		"dqResponses": [{
+			"questionSetID": 27,
+			"questionID": 23,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 24,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 25,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 11,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 12,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 13,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		}],
+		"valuePack": null,
+		"govermentIDs": [{
+			"type": "International ID",
+			"value": "20180206474paea12",
+			"issuingCountryCode": "CHN",
+			"stateCode": null
+		}],
+		"additionalProducts": null,
+		"rescoreProducts": null,
+		"biqListVo": {
+			"testTime": 1517922347248,
+			"testId": null,
+			"biqUserResponseList": [{
+				"questionCode": "23",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "24",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "25",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "11",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "12",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			},
+			{
+				"questionCode": "13",
+				"responseType": null,
+				"freeFormAnswer": null,
+				"selectedResponseCodes": ["1"]
+			}]
+		},
+		"dqresponses": [{
+			"questionSetID": 27,
+			"questionID": 23,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 24,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 25,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 11,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 12,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		},
+		{
+			"questionSetID": 27,
+			"questionID": 13,
+			"questionResponse": {
+				"id": [1],
+				"text": null
+			}
+		}]
+	}
+}
+	</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource>

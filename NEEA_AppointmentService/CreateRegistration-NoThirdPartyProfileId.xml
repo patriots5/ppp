@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="b0d364a0-c6c3-4e5b-bddf-2901f917f7b3" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="CreateRegistration-NoThirdPartyProfileId" searchProperties="true" timeout="0" disabled="true" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="5b0b06fd-5828-4d92-92d8-ac3f0d452b56fileName">CreateRegistration</con:setting><con:setting id="1c8c0741-0d35-40f8-8bc4-dc0c359c3490fileName">CreateRegistration-NoGovernamentIdType</con:setting><con:setting id="645dc0f4-3af0-49bc-9172-1702f694e0c8fileName">CreateRegistration-NoGovernamentIdValue</con:setting><con:setting id="b0d364a0-c6c3-4e5b-bddf-2901f917f7b3fileName">CreateRegistration-NoThirdPartyProfileId</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="properties" name="Properties" id="bb19793e-4ff7-43d6-a4fa-83fca4efd9ea"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>EtsProfileID</con:name><con:value>8XTUPPEB</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="CreateRegistration" id="e94d30e7-fda7-4db0-8b5e-3cd7408a553d"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NeeaAppointmentService</con:interface><con:operation>doScheduling</con:operation><con:request name="CreateRegistration" id="9bc7304b-f474-420a-a2a4-b6767b6be97c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaSchedulingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices" xmlns:sch="http://ereg.ets.org/external/service/soap/neea/scheduling/schemas">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <thir:SchedulingRequest>
+            <sch:Scheduling_SOA_Message>
+            <sch:requestHeader>
+            <source>${#TestSuite#source}</source>
+                <informationCategory >
+                    <classificationCode>01</classificationCode>
+                    <classificationMessage/>
+                </informationCategory>
+                <clientTransactionId >
+                    <id>29</id>
+                    <guid/>
+                </clientTransactionId>
+                <requestTime>2017-09-05T12:04:08.955+08:00</requestTime>
+                <batchid >
+                    <id>2117032712</id>
+                    <guid/>
+                </batchid>
+                <sessionid >
+                    <id>15334987</id>
+                    <guid/>
+                </sessionid>
+                <action>Order2017-09-05T12:06:08.955+08:00.CreateOrder</action>
+                
+                <sch:programCode >TEL</sch:programCode>
+                <accountingDate >2017-09-05</accountingDate>
+                <requestsData >
+                    <request>
+                        <name>lateRegistrationFlag</name>
+                        <data>
+                            <string>false</string>
+                        </data>
+                    </request>
+                </requestsData>
+                <accountingValue >2117032712-29</accountingValue>
+                <eventDate >2017-09-05T12:06:08.955+08:00</eventDate>
+            </sch:requestHeader>
+            <sch:booking>
+                <sch:etsProfileID>${Properties#EtsProfileID}</sch:etsProfileID>
+                <sch:thirdPartyProfileID></sch:thirdPartyProfileID>
+                <sch:thirdPartyAppointmentID>123456789</sch:thirdPartyAppointmentID>
+                <sch:test>
+                    <programCode>TEL</programCode>
+                    <sch:examID>XML</sch:examID>
+                </sch:test>
+                <sch:slots>
+                    <sch:slot>
+                        <sch:siteCode>STNDEV3</sch:siteCode>
+                        <sch:startTime>2017-12-15T09:00:00.000+08:00</sch:startTime>
+                        <sch:adminID>20170827A</sch:adminID>
+                    </sch:slot>
+                </sch:slots>
+                <sch:feeWaivedFlag>false</sch:feeWaivedFlag>
+                <sch:searchServiceOptInStatus>Y</sch:searchServiceOptInStatus>
+            </sch:booking>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>24</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>273</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>26</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>22</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>25</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>522</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>14</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>418</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>27</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>385</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>28</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>30</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:govermentIDs>
+                <sch:type>International ID</sch:type>
+                <sch:value>12345678</sch:value>
+                <sch:issuingCountryCode>CHN</sch:issuingCountryCode>
+            </sch:govermentIDs>
+         </sch:Scheduling_SOA_Message>
+      </thir:SchedulingRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="452ffbdc-af0a-478e-9df9-5380eea24974"/><con:assertion type="Valid HTTP Status Codes" id="8a7ed53f-4a2a-4ca6-b5bc-33eb3bdcbc3b" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="25baa36b-e53c-404f-bbfe-2a64ffa515b2" name="Match content of [soap:Body]"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+//soap:Body[1]</path><content>&lt;soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"/></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="1976de8b-b573-4097-bdd3-beb57a38530d" name="Match content of [soap:Body]"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+//soap:Body[1]</path><content>&lt;soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"/></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="3a0e81da-0733-4d4c-9ee0-5aafcb3e1203" name="Match content of [soap:Body]"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
+//soap:Body[1]</path><content>&lt;soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"/></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>b4a1fa4b-54ba-431b-ab84-59a7409a991b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c15a450c-3a20-4d89-b986-c528fa1627cd</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

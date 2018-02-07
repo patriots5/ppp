@@ -1,0 +1,10 @@
+ScoreCancel.xml
+ScoreReinstate.xml
+ReasonTypeAlreadyExistsScoreCancel.xml
+ScoreReinstate_ScoreNotCancelled.xml
+ScoreCancel_ReinstatedScore.xml
+InvalidRequestTypeScoreHold.xml
+InvalidsourceSystemIdScoreCancel.xml
+InvalidAppointmentIdScoreCancel.xml
+InvalidreasonTypeScoreCancel.xml
+InvalidRequestTypeScoreCancel-2.xml

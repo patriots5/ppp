@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:interface xsi:type="con:WsdlInterface" id="7c38a605-bf48-4350-82d7-b36cf62b5731" wsaVersion="NONE" name="NEEA_ProfileService" type="wsdl" bindingName="{http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices}ThirdPartyProfileServicesBinding" soapVersion="1_1" anonymous="optional" definition="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="7c38a605-bf48-4350-82d7-b36cf62b5731fileName">NEEA_ProfileService</con:setting></con:settings><con:definitionCache type="TEXT" rootPart="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?wsdl"><con:part><con:url>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ThirdPartyProfileServices" targetNamespace="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd3="http://ereg.ets.org/external/service/soap/neea/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices">
+      <xsd:import namespace="http://ereg.ets.org/external/service/soap/neea/schema" schemaLocation="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?xsd=profile.xsd"/>
+      <xsd:import namespace="http://ereg.ets.org/external/service/soap/neea/schema" schemaLocation="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?xsd=commonobjects.xsd"/>
+      <xsd:complexType name="CreateProfileRequestType">
+        <xsd:sequence>
+          <xsd:element name="requestHeader" type="xsd3:requestType"/>
+          <xsd:element name="profile" type="xsd3:ProfileType"/>
+          <xsd:element name="thirdPartyProfileID" type="xsd3:ThirdPartyProfileIDType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CreateProfileResponseType">
+        <xsd:sequence>
+          <xsd:element name="responseHeader" type="xsd3:responseType"/>
+          <xsd:element name="etsProfileID" type="xsd3:ETSProfileIDType">
+            <xsd:annotation>
+              <xsd:documentation>The unique ID assigned by ETS to this Profile</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UpdateProfileRequestType">
+        <xsd:sequence>
+          <xsd:element name="requestHeader" type="xsd3:requestType"/>
+          <xsd:element name="profile" type="xsd3:ProfileType"/>
+          <xsd:element name="thirdPartyProfileID" type="xsd3:ThirdPartyProfileIDType"/>
+          <xsd:element name="etsProfileID" type="xsd3:ETSProfileIDType">
+            <xsd:annotation>
+              <xsd:documentation>The unique ID assigned by ETS to this Profile</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="UpdateProfileResponseType">
+        <xsd:sequence>
+          <xsd:element name="responseHeader" type="xsd3:responseType"/>
+          <xsd:element name="etsProfileID" type="xsd3:ETSProfileIDType">
+            <xsd:annotation>
+              <xsd:documentation>The unique ID assigned by ETS to this Profile</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="createProfileRequest" type="tns:CreateProfileRequestType"/>
+      <xsd:element name="createProfileResponse" type="tns:CreateProfileResponseType"/>
+      <xsd:element name="updateProfileRequest" type="tns:UpdateProfileRequestType"/>
+      <xsd:element name="updateProfileResponse" type="tns:UpdateProfileResponseType"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateProfileSOAPDocumentIn">
+    <wsdl:part element="tns:createProfileRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProfileSOAPDocumentIn">
+    <wsdl:part element="tns:updateProfileRequest" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateProfileSOAPDocumentOut">
+    <wsdl:part element="tns:createProfileResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateProfileSOAPDocumentOut">
+    <wsdl:part element="tns:updateProfileResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ThirdPartyProfileServicesPort">
+    <wsdl:operation name="createProfile">
+      <wsdl:input message="tns:CreateProfileSOAPDocumentIn"></wsdl:input>
+      <wsdl:output message="tns:CreateProfileSOAPDocumentOut"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateProfile">
+      <wsdl:input message="tns:UpdateProfileSOAPDocumentIn"></wsdl:input>
+      <wsdl:output message="tns:UpdateProfileSOAPDocumentOut"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ThirdPartyProfileServicesBinding" type="tns:ThirdPartyProfileServicesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createProfile">
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateProfile">
+      <wsdl:input>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="parameters" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ThirdPartyProfileServices">
+    <wsdl:port binding="tns:ThirdPartyProfileServicesBinding" name="ThirdPartyProfileServicesPort">
+      <soap:address location="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?xsd=profile.xsd</con:url><con:content><![CDATA[<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ereg.ets.org/external/service/soap/neea/schema" xmlns="http://ereg.ets.org/external/service/soap/neea/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?xsd=commonobjects.xsd"/>
+  <xsd:complexType name="GovernmentIDType">
+    <xsd:sequence>
+      <xsd:element name="type">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="30"/>
+            <!--<xsd:enumeration value="US Driver License" />
+						<xsd:enumeration value="Intl Driver License" />
+						<xsd:enumeration value="State ID" />-->
+            <xsd:enumeration value="Passport"/>
+            <!--<xsd:enumeration value="SSN" />-->
+            <xsd:enumeration value="International ID"/>
+            <xsd:enumeration value="Other"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="value">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="100"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="issuingCountryCode" type="ISOCountryCodeType"/>
+      <xsd:element minOccurs="0" name="stateCode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DemographicQuestionResponseType">
+    <xsd:sequence>
+      <xsd:element name="questionSetID">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:positiveInteger"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="questionID">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:positiveInteger"/>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="1" name="questionResponse">
+        <xsd:complexType>
+          <xsd:choice>
+            <xsd:element maxOccurs="unbounded" minOccurs="1" name="id" type="xsd:positiveInteger">
+              <xsd:annotation>
+                <xsd:documentation>Should be a list of answers id from the specification</xsd:documentation>
+              </xsd:annotation>
+            </xsd:element>
+            <xsd:element minOccurs="1" name="text">
+              <xsd:simpleType>
+                <xsd:annotation>
+                  <xsd:documentation>Text Response</xsd:documentation>
+                </xsd:annotation>
+                <xsd:restriction base="xsd:string">
+                  <xsd:minLength value="1"/>
+                  <xsd:maxLength value="255"/>
+                </xsd:restriction>
+              </xsd:simpleType>
+            </xsd:element>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="ThirdPartyProfileIDType">
+    <xsd:annotation>
+      <xsd:documentation>The unique ID the Originator assigns to this Profile</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="36"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ETSProfileIDType">
+    <xsd:annotation>
+      <xsd:documentation>The unique ID assigned by ETS to the Profile</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="36"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="AccommodationType">
+    <xsd:sequence>
+      <xsd:element name="startDate" type="xsd:date"/>
+      <xsd:element name="endDate" type="xsd:date"/>
+      <xsd:element default="false" name="accommodationStatus" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>A boolean flag indicating whether the accommodation is approved. Defaut is False</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="accommodationCode">
+        <xsd:simpleType>
+          <xsd:annotation>
+            <xsd:documentation>The unique code assigned by ETS for each accommodation</xsd:documentation>
+          </xsd:annotation>
+          <xsd:restriction base="xsd:positiveInteger">
+            <xsd:maxExclusive value="999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="comments">
+        <xsd:annotation>
+          <xsd:documentation>The accommodation comments.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="additionalParameters" type="AdditionalParametersType">
+        <xsd:annotation>
+          <xsd:documentation>Used to send additional Information specific to an accommodationcode For eg: 84 needs multiplier code name=extendedmultiplier,integer=1</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ProfileType">
+    <xsd:sequence>
+      <xsd:element name="dateOfBirth" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's date of birth.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="gender">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's gender(sex),Male , Female , Unknown</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="M"/>
+            <xsd:enumeration value="F"/>
+            <xsd:enumeration value="U"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="lastName">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's last or family name; for example, Bush.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="30"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="firstName">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's first name; for example, George.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="30"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="middleName">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's middle name; for example, Walker.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="30"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="prefix" type="xsd:unsignedInt">
+        <xsd:annotation>
+          <xsd:documentation>Candidate prefix should be one of these integer values 1-Miss,2-Mr,3-Mrs,4-Ms,5-Dr</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="suffix" type="xsd:unsignedInt">
+        <xsd:annotation>
+          <xsd:documentation>Candidate suffix should be one of these integer values 1-Jr,2-Sr,3-II,4-III,5-IV</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="address" type="AddressType"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="1" name="govermentIDs" type="GovernmentIDType"/>
+      <xsd:element default="2" name="contactPreference">
+        <xsd:annotation>
+          <xsd:documentation>A flag indicating how the candidate prefers to be contacted by ETS. 1-Email, 2-Standard Mail Default is set to 2</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:positiveInteger">
+            <xsd:maxInclusive value="10"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element default="false" name="validForMarketing" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>A boolean flag indicating whether ETS may contact the candidate for marketing purposes.Defaut is False</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="nativeLanguage" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>The first language the candidate spoke.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="nativeCountry" type="ISOCountryCodeType">
+        <xsd:annotation>
+          <xsd:documentation>The country in which the candidate was born.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="accommodations" type="AccommodationType"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="hobson" type="DemographicQuestionResponseType"/>
+      <xsd:element name="LastModified" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation>System dateTime for the profile been updated</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="searchServiceOptInStatus">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's Search Service Opt IN Status</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="N"/>
+            <xsd:enumeration value="Y"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService?xsd=commonobjects.xsd</con:url><con:content><![CDATA[<xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ereg.ets.org/external/service/soap/neea/schema" xmlns="http://ereg.ets.org/external/service/soap/neea/schema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:annotation>
+    <xsd:documentation>ETS message document schema. Copyright 2005 ETS, All rights reserved.</xsd:documentation>
+  </xsd:annotation>
+  <xsd:annotation>
+    <xsd:documentation>Common types used by multiple primary elements</xsd:documentation>
+  </xsd:annotation>
+  <xsd:complexType name="IdType">
+    <xsd:annotation>
+      <xsd:documentation>an id consists of both a code which is alphanumeric and human readable and a guid which is intended for computer to computer communication</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="id">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="guid">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="36"/>
+            <xsd:maxLength value="36"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="InformationClassification">
+    <xsd:sequence>
+      <xsd:element name="classificationCode" nillable="false" type="xsd:string"/>
+      <xsd:element name="classificationMessage" nillable="false" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType block="extension" name="InformationClassification1">
+    <xsd:sequence>
+      <xsd:element name="ClassificationCode" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="01"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ClassificationMessage" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ETS Restricted, unpublished property of ETS. Do not duplicate or distribute. Use and distribution lmited solely to authorized personnel."/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType block="extension" name="InformationClassification2">
+    <xsd:sequence>
+      <xsd:element name="ClassificationCode" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="02"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ClassificationMessage" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ETS Confidential, unpublished property of ETS. Use and distribution limited solely to authorized personnel on a need-to-know basis."/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType block="extension" name="InformationlClassification3">
+    <xsd:sequence>
+      <xsd:element name="ClassificationCode" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="03"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="ClassificationMessage" nillable="false">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ETS Public. Public, published ETS information. No restrictions."/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="requestType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="informationCategory" type="InformationClassification"/>
+      <xsd:element name="clientTransactionId" type="IdType">
+        <xsd:annotation>
+          <xsd:documentation>unique identifier for the request</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="requestTime" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation>System dateTime for the origination of the request</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="batchid" type="IdType">
+        <xsd:annotation>
+          <xsd:documentation>used to identify a group of messages as part of a batch</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="sessionid" type="IdType">
+        <xsd:annotation>
+          <xsd:documentation>used to identify conversational messages</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="action">
+        <xsd:annotation>
+          <xsd:documentation>requested operation-helps for SOA approach future use</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="36"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="source">
+        <xsd:annotation>
+          <xsd:documentation>identifies source eg:NEEA</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="36"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="programCode">
+        <xsd:annotation>
+          <xsd:documentation>identifies program eg:NGT,GRE</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="6"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="accountingDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>accounting date for reconcilliation</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="requestsData">
+        <xsd:annotation>
+          <xsd:documentation>Placeholder for additional data</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="request" type="AdditionalParametersType"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="accountingValue" type="xsd:string">
+        <xsd:annotation>
+          <xsd:documentation>Third Party Order number</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="eventDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation>The datetime that the event actually occurred in third party system</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="responseType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="informationCategory" type="InformationClassification"/>
+      <xsd:element name="status" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>set to true if processing was successful, set to false if there was any event that the consumer should be concerned with.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="clientTransactionId" type="IdType">
+        <xsd:annotation>
+          <xsd:documentation>unique identifier for the client request</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="transactionId" type="IdType">
+        <xsd:annotation>
+          <xsd:documentation>uniquely identifies the response</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="responseTime" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation>System dateTime for the origination of the response</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="accountingDate" type="xsd:date">
+        <xsd:annotation>
+          <xsd:documentation>accounting date for reconcilliation</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="transactionType">
+        <xsd:annotation>
+          <xsd:documentation>identifies transaction type eg:Create Profile, Modify Profile</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="36"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="resultsData">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" name="result" type="AdditionalParametersType"></xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="messages">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" name="message">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="source">
+                    <xsd:annotation>
+                      <xsd:documentation>The name of the source system that generated the message</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:minLength value="1"/>
+                        <xsd:maxLength value="36"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="severity">
+                    <xsd:annotation>
+                      <xsd:documentation>The first 4 enums are levels of logging, the last 2 are errors.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:enumeration value="Debug"/>
+                        <xsd:enumeration value="Info"/>
+                        <xsd:enumeration value="Warning"/>
+                        <xsd:enumeration value="Error"/>
+                        <xsd:enumeration value="CriticalError"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                  <xsd:element name="identifier" type="xsd:string">
+                    <xsd:annotation>
+                      <xsd:documentation>Messages with Debug,Info,Warning severity will use a 0 in this field.</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element name="text">
+                    <xsd:annotation>
+                      <xsd:documentation>Human readable description of message.</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:simpleType>
+                      <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="255"/>
+                      </xsd:restriction>
+                    </xsd:simpleType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AdditionalParametersType">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:string"/>
+      <xsd:element name="data">
+        <xsd:complexType>
+          <xsd:choice>
+            <xsd:element minOccurs="1" name="string" type="xsd:string"/>
+            <xsd:element minOccurs="1" name="duration" type="xsd:duration"/>
+            <xsd:element minOccurs="1" name="integer" type="xsd:integer"/>
+            <xsd:element minOccurs="1" name="float" type="xsd:float"/>
+            <xsd:element minOccurs="1" name="dateTime" type="xsd:dateTime"/>
+            <xsd:element minOccurs="1" name="date" type="xsd:date"/>
+            <xsd:element minOccurs="1" name="time" type="xsd:time"/>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="ISOCountryCodeType">
+    <xsd:annotation>
+      <xsd:documentation>3 Character ISO CountryCode</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="3"/>
+      <xsd:pattern value="[0-9a-zA-Z]{3}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="AddressType">
+    <xsd:annotation>
+      <xsd:documentation>An object containing the address information.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="type">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="30"/>
+            <xsd:enumeration value="Primary"/>
+            <xsd:enumeration value="Secondary"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="addressLine1" type="AddressLineType">
+        <xsd:annotation>
+          <xsd:documentation>The first line of postal address. Usually the street address, apartment number, etc.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="addressLine2" type="AddressLineType">
+        <xsd:annotation>
+          <xsd:documentation>The second line of postal address, if any.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="addressLine3" type="AddressLineType">
+        <xsd:annotation>
+          <xsd:documentation>The third line of postal address, if any.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="addressLine4" type="AddressLineType">
+        <xsd:annotation>
+          <xsd:documentation>The fourth line of postal address, if any.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="city">
+        <xsd:annotation>
+          <xsd:documentation>The city name of the candidate's most current mailing address.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="30"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="country" type="ISOCountryCodeType"/>
+      <xsd:element minOccurs="0" name="provinceAndPostalCode">
+        <xsd:complexType>
+          <xsd:choice maxOccurs="1" minOccurs="1">
+            <xsd:element minOccurs="0" name="usCanPostal" type="UsCanProvinceAndPostalCode"/>
+            <xsd:element minOccurs="0" name="otherPostal" type="OtherProvinceAndPostalCode"/>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element maxOccurs="2" minOccurs="0" name="primaryPhone" type="PhoneNumberType"/>
+      <xsd:element maxOccurs="2" minOccurs="0" name="alternatePhone" type="PhoneNumberType"/>
+      <xsd:element maxOccurs="2" minOccurs="0" name="faxPhone" type="FaxNumberType"/>
+      <xsd:element maxOccurs="2" minOccurs="0" name="emailAddress" type="EmailAddressType">
+        <xsd:annotation>
+          <xsd:documentation>The candidate's email address, if any.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="mailingLabel" type="xsd:base64Binary">
+        <xsd:annotation>
+          <xsd:documentation>Mailing Label</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="EmailAddressType">
+    <xsd:annotation>
+      <xsd:documentation>Email address</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="0"/>
+      <xsd:maxLength value="70"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="UsCanProvinceAndPostalCode">
+    <xsd:sequence>
+      <xsd:element name="UsCanProvince">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="2"/>
+            <xsd:maxLength value="3"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="postalCode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="5"/>
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="OtherProvinceAndPostalCode">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="otherProvince">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="otherPostalCode">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="12"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PhoneNumberType">
+    <xsd:annotation>
+      <xsd:documentation>An object containing the data elements that describe a phone number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="countryISDCode">
+        <xsd:annotation>
+          <xsd:documentation>A one-, two- or three-digit country prefix dialed before the end point number; for example, USA is 1, China is 86, etc.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:positiveInteger">
+            <xsd:maxInclusive value="99999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="phoneNumber">
+        <xsd:annotation>
+          <xsd:documentation>A subscriber's end-point phone number usually consisting of an area code, city code and subscriber number.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="phoneExtension">
+        <xsd:annotation>
+          <xsd:documentation>The subscriber's end point number within a private branch exchange.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="6"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaxNumberType">
+    <xsd:annotation>
+      <xsd:documentation>An object containing the data elements that describe a fax number.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="countryISDCode">
+        <xsd:annotation>
+          <xsd:documentation>A one-, two- or three-digit country prefix dialed before the end point number; for example, USA is 1, China is 86, etc.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:positiveInteger">
+            <xsd:maxInclusive value="99999"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="faxNumber">
+        <xsd:annotation>
+          <xsd:documentation>A subscriber's end-point fax number usually consisting of an area code, city code and subscriber number.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="20"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:simpleType name="AddressLineType">
+    <xsd:annotation>
+      <xsd:documentation>The format of a line of address.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:minLength value="1"/>
+      <xsd:maxLength value="100"/>
+      <xsd:whiteSpace value="collapse"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="locationType">
+    <xsd:sequence>
+      <xsd:element name="city">
+        <xsd:annotation>
+          <xsd:documentation>The city name of the candidate's most current mailing address.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="30"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="country" type="ISOCountryCodeType"/>
+      <xsd:element name="countryName">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="50"/>
+            <xsd:whiteSpace value="collapse"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="provinceAndPostalCode">
+        <xsd:complexType>
+          <xsd:choice maxOccurs="1" minOccurs="1">
+            <xsd:element minOccurs="0" name="usCanPostal" type="UsCanProvinceAndPostalCode"/>
+            <xsd:element minOccurs="0" name="otherPostal" type="OtherProvinceAndPostalCode"/>
+          </xsd:choice>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaProfileService</con:endpoint><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaprofileservice</con:endpoint></con:endpoints><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:interface>

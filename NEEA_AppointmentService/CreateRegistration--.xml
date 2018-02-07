@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="6f0914d2-810e-47d7-8ab2-b107b363e707" discardOkResults="true" failOnError="false" failTestCaseOnErrors="true" keepSession="false" name="CreateRegistration" searchProperties="true" timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false" amfEndpoint="" amfLogin="" amfPassword="" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="5b0b06fd-5828-4d92-92d8-ac3f0d452b56fileName">CreateRegistration</con:setting><con:setting id="21378c64-3480-462e-99a9-3486f59e5deffileName">CreateProfile-2</con:setting><con:setting id="b0a580ef-ffd1-4b49-9e96-5b5e65195db9fileName">CreateProfile-2</con:setting><con:setting id="6f0914d2-810e-47d7-8ab2-b107b363e707fileName">CreateRegistration--</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="datagen" name="DataGen" id="e92f9b71-1315-4872-93c7-6c6517fac0c5"><con:settings/><con:config xsi:type="con:DataGeneratorStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:property type="Script"><con:configuration><script>import org.apache.commons.lang3.RandomStringUtils; 
+return RandomStringUtils.randomAlphabetic(4).toLowerCase();</script></con:configuration><con:name>randomString</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("yyyyMMddSSS").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>thirdP</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); cal.add(Calendar.DATE, -1); new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'+08:00'").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>eventDate</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'+08:00'").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>currentDate</con:name><con:mode>STEP</con:mode><con:shared>true</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("yyyyMMddSSS").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>thirdPartyProfileId</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); cal.add(Calendar.DATE, +30); new SimpleDateFormat("YYYY-MM-dd").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>testStartTime</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); cal.add(Calendar.DATE, +30); new SimpleDateFormat("YYYYMMdd").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>adminId</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("MMdd").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>MMdd</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("SSS").format(cal.getTime());}</template><entitize>false</entitize></con:configuration><con:name>milliSeconds</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("yyyy-MM-dd").format(cal.getTime()).trim();}</template><entitize>false</entitize></con:configuration><con:name>YYYY-MM-DD</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property><con:property type="Template"><con:configuration><template>${=import java.text.SimpleDateFormat; Calendar cal = Calendar.getInstance(); new SimpleDateFormat("MM-dd").format(cal.getTime()).trim();}</template><entitize>false</entitize></con:configuration><con:name>MM-DD</con:name><con:mode>STEP</con:mode><con:shared>false</con:shared></con:property></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer1" id="e7c0d469-6a32-45dc-8235-d3bf808b0cbb"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false" disabled="false"><con:name>thirdPartyProfileId</con:name><con:sourceType>thirdP</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:targetType>ThirdPartyProfileId</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>randomString</con:name><con:sourceType>randomString</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:targetType>randomString</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>milliSecond</con:name><con:sourceType>milliSeconds</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:targetType>milliSeconds</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>MMdd</con:name><con:sourceType>MMdd</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:targetType>MMdd</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="request" name="createProfile" id="45141d6e-f473-4159-91b7-45a0816f9301"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NEEA_ProfileService</con:interface><con:operation>createProfile</con:operation><con:request name="createProfile" id="8ee09929-df6e-49c8-8080-1141aa789c2b"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="password" value="1qaz@WSX"/>
+  &lt;con:entry key="username" value="Intsyseregdvi"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaprofileservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:sch="http://ereg.ets.org/external/service/soap/neea/schema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices">
+   <soapenv:Header><wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><wsse:UsernameToken wsu:Id="UsernameToken-188A97C98AB3ACF83A15082577701591"><wsse:Username>Intsyseregdvi</wsse:Username><wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">1qaz@WSX</wsse:Password><wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">rNFwSG6od/yQuX3mbK1CwQ==</wsse:Nonce><wsu:Created>2017-10-17T16:29:30.154Z</wsu:Created></wsse:UsernameToken></wsse:Security>
+
+   </soapenv:Header>
+   <soapenv:Body>
+      <thir:createProfileRequest>
+         <requestHeader>
+            <!--Optional:-->
+            <informationCategory>
+               <classificationCode>01</classificationCode>
+               <classificationMessage/>
+            </informationCategory>
+            <clientTransactionId>
+               <id>2</id>
+               
+            </clientTransactionId>
+            <requestTime>${DataGen#currentDate}</requestTime>
+            <batchid>
+               <id>${Properties#thirdPartyProfileId}11</id>
+               <!--Optional:-->
+               <guid>?</guid>
+            </batchid>
+            <!--Optional:-->
+            <sessionid>
+               <id>${Properties#thirdPartyProfileId}12</id>
+            </sessionid>
+            <!--Optional:-->
+            <action>Profile.CreateProfile</action>
+            <source>${#TestSuite#source}</source>
+            <programCode>TEL</programCode>
+            <!--Optional:-->
+          <accountingDate>2016-08-30</accountingDate>
+            <!--Optional:-->
+            <requestsData>
+               <!--1 or more repetitions:-->
+               <request>
+                  <name>citizenshipCountry</name>
+                  <data>
+                     <!--You have a CHOICE of the next 7 items at this level-->
+                     <string>CHN</string>
+                  </data>
+               </request>
+            </requestsData>
+            <accountingValue>${Properties#thirdPartyProfileId}22</accountingValue>
+            <eventDate>${DataGen#eventDate}</eventDate>
+         </requestHeader>
+         <profile>
+            <sch:dateOfBirth>1980-${DataGen#MM-DD}</sch:dateOfBirth>
+            <sch:gender>M</sch:gender>
+            <sch:lastName>ch${Properties#randomString}last</sch:lastName>
+            <!--Optional:-->
+            <sch:firstName>ch${Properties#randomString}first</sch:firstName>
+            <!--Optional:-->
+            <sch:middleName>m</sch:middleName>
+            <!--Optional:-->
+            <!--Zero or more repetitions:-->
+            <sch:address>
+               <type>Primary</type>
+               <addressLine1>${Properties#milliSeconds} ${Properties#randomString} line1</addressLine1>
+               <!--Optional:-->
+               <addressLine2>${Properties#milliSeconds} ${Properties#randomString} line2</addressLine2>
+               <city>Shenzhen</city>
+               <country>CHN</country>
+               <!--Optional:-->
+               <provinceAndPostalCode>
+                  <otherPostal>
+                     <!--Optional:-->
+                     <otherProvince>Guangdong</otherProvince>
+                     <!--Optional:-->
+                     <otherPostalCode>518053</otherPostalCode>
+                  </otherPostal>
+               </provinceAndPostalCode>
+               <!--0 to 2 repetitions:-->
+               <primaryPhone>
+                  <!--Optional:-->
+                  <countryISDCode>86</countryISDCode>
+                  <phoneNumber>${Properties#MMdd}${Properties#milliSeconds}001</phoneNumber>
+                  <!--Optional:-->
+                  <phoneExtension>111</phoneExtension>
+               </primaryPhone>
+               <!--0 to 2 repetitions:-->
+               <alternatePhone>
+                  <!--Optional:-->
+                  <countryISDCode>86</countryISDCode>
+                  <phoneNumber>${Properties#MMdd}${Properties#milliSeconds}002</phoneNumber>
+                  <!--Optional:-->
+                  <phoneExtension>222</phoneExtension>
+               </alternatePhone>
+               <emailAddress>ch${Properties#randomString}@mail.com</emailAddress>
+               <!--Optional:-->
+               <mailingLabel>NTE4</mailingLabel>
+            </sch:address>
+            <sch:contactPreference>1</sch:contactPreference>
+            <sch:validForMarketing>true</sch:validForMarketing>
+            <sch:nativeLanguage>chi</sch:nativeLanguage>
+            <sch:nativeCountry>CHN</sch:nativeCountry>
+            <sch:LastModified>${DataGen#eventDate}</sch:LastModified>
+            <!--Optional:-->
+            <sch:searchServiceOptInStatus>N</sch:searchServiceOptInStatus>
+            <sch:govermentIDs>
+               <sch:type>International ID</sch:type>
+               <sch:value>${Properties#ThirdPartyProfileId}${Properties#randomString}12</sch:value>
+               <sch:issuingCountryCode>CHN</sch:issuingCountryCode>
+            </sch:govermentIDs>
+
+         </profile>
+         <thirdPartyProfileID>${Properties#thirdPartyProfileId}${Properties#randomString}</thirdPartyProfileID>
+      </thir:createProfileRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="adb156df-f856-4593-9de8-1f186094a550"/><con:assertion type="XPath Match" id="cfd5acc4-1415-41ec-a6fd-022b854437b7" name="Match content of [status]"><con:configuration><path>declare namespace ns4='http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices';
+//ns4:createProfileResponse[1]/responseHeader[1]/status[1]/text()</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="9375ccde-94ad-4c86-8017-04d93d8b835e" name="Match content of [ns2:transactionType]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices';
+//ns3:createProfileResponse[1]/responseHeader[1]/ns2:transactionType[1]/text()</path><content>Profile.CreateProfile</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>Basic</con:authProfile><con:username>Intsyseregdvi</con:username><con:password>1qaz@WSX</con:password></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:testStep type="transfer" name="Property Transfer" id="8321717c-debe-4b96-b25c-0abb95af037a"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false" disabled="true"><con:name>randomString</con:name><con:sourceType>randomString</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:sourcePath/><con:targetType>randomString</con:targetType><con:targetStep>Properties</con:targetStep><con:targetPath/><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false" disabled="true"><con:name>thirdPartyProfileId</con:name><con:sourceType>thirdP</con:sourceType><con:sourceStep>DataGen</con:sourceStep><con:sourcePath/><con:targetType>ThirdPartyProfileId</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" entitize="false" transferChildNodes="false"><con:name>etsProfileId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>createProfile</con:sourceStep><con:sourcePath>declare namespace ns4='http://ereg.ets.org/external/service/soap/neea/profile/ThirdPartyProfileServices';
+//ns4:createProfileResponse[1]/etsProfileID[1]</con:sourcePath><con:targetType>EtsProfileID</con:targetType><con:targetStep>Properties</con:targetStep><con:upgraded>true</con:upgraded></con:transfers></con:config></con:testStep><con:testStep type="properties" name="Properties" id="c3a108a9-6857-482d-850e-e7f60aea03cc"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>EtsProfileID</con:name><con:value>6L70G35C</con:value></con:property><con:property><con:name>ThirdPartyProfileId</con:name><con:value>20171127537</con:value></con:property><con:property><con:name>randomString</con:name><con:value>bwdv</con:value></con:property><con:property><con:name>batchId</con:name><con:value>2117032712</con:value></con:property><con:property><con:name>clientTransactionId</con:name><con:value>29</con:value></con:property><con:property><con:name>accountingValue</con:name><con:value>2117032712-29</con:value></con:property><con:property><con:name>milliSeconds</con:name><con:value>328</con:value></con:property><con:property><con:name>MMdd</con:name><con:value>1127</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="jdbc" name="verify_ETS_CUST_table" id="2d56765d-eec1-4e72-b204-b042097f31db"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM ETS_CUST WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM ETS_CUST_LNKG WHERE LNKG_TYP_CDE = 'DSPID' AND LNKG_KY = '${Properties#EtsProfileId}')
+ </con:query><con:assertion type="XPath Match" id="18c79061-5936-4b24-88b7-98e7a4e40992" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="da0af8c5-6bba-40c5-a491-58f438014b50" name="Match content of [SRC_SYS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SRC_SYS_CDE[1]/text()</path><content>NEA</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="7c254093-4380-4e6f-9d0e-08dd19b3eaf4" name="Match content of [SRC_SYS_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SRC_SYS_CDE[1]/text()</path><content>NEA</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="1e2a3bf4-ec06-4563-bb6a-b7f4d7b69d48" name="Match content of [BRTH_DTE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/BRTH_DTE[1]/text()</path><content>1980-${DataGen#MM-DD} 00:00:00.0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="ec399a56-6014-49a6-ab4c-abc72609ab5f" name="Match content of [GNDR_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/GNDR_CDE[1]/text()</path><content>M</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="67e60b4f-f3c9-414d-b073-56bcf69acef0" name="Match content of [MID_NAM]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/MID_NAM[1]/text()</path><content>m</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="request" name="CreateRegistration" id="655c96af-1cd6-4087-97bf-6fddfa68f5fc"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NeeaAppointmentService</con:interface><con:operation>doScheduling</con:operation><con:request name="CreateRegistration" id="9bc7304b-f474-420a-a2a4-b6767b6be97c"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaSchedulingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:sch="http://ereg.ets.org/external/service/soap/neea/schema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices">\r
+   <soapenv:Header>\r
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">\r
+         <wsse:UsernameToken wsu:Id="UsernameToken-188A97C98AB3ACF83A15082577701591">\r
+            <wsse:Username>Intsyseregdvi</wsse:Username>\r
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">1qaz@WSX</wsse:Password>\r
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">rNFwSG6od/yQuX3mbK1CwQ==</wsse:Nonce>\r
+            <wsu:Created>2017-10-17T16:29:30.154Z</wsu:Created>\r
+         </wsse:UsernameToken>\r
+      </wsse:Security>\r
+   </soapenv:Header>\r
+   <soapenv:Body>\r
+      <thir:SchedulingRequest>\r
+         <sch:Scheduling_SOA_Message>\r
+            <sch:requestHeader>\r
+               <informationCategory>\r
+                  <classificationCode>01</classificationCode>\r
+                  <classificationMessage/>\r
+               </informationCategory>\r
+               <clientTransactionId>\r
+                  <id>${Properties#clientTransactionID}</id>\r
+               </clientTransactionId>\r
+               <requestTime>${DataGen#currentDate}</requestTime>\r
+               <batchid>\r
+                  <id>${Properties#batchID}</id>\r
+               </batchid>\r
+               <sessionid>\r
+                  <id>15334987</id>\r
+               </sessionid>\r
+               <action>Order.CreateOrder</action>\r
+               <source>${#TestSuite#source}</source>\r
+               <programCode>TEL</programCode>\r
+               <accountingDate>2017-11-26</accountingDate>\r
+               <requestsData>\r
+                  <request>\r
+                     <name>lateRegistrationFlag</name>\r
+                     <data>\r
+                        <string>false</string>\r
+                     </data>\r
+                  </request>\r
+               </requestsData>\r
+               <accountingValue>${Properties#accountingValue}</accountingValue>\r
+               <eventDate>${DataGen#eventDate}</eventDate>\r
+            </sch:requestHeader>\r
+            <sch:booking>\r
+               <sch:etsProfileID>${Properties#EtsProfileID}</sch:etsProfileID>\r
+               <sch:thirdPartyProfileID>${Properties#ThirdPartyProfileId}${Properties#randomString}</sch:thirdPartyProfileID>\r
+<!--               <sch:thirdPartyAppointmentID>${Properties#ThirdPartyProfileId}9</sch:thirdPartyAppointmentID>\r-->
+               <sch:test>\r
+                  <programCode>TEL</programCode>\r
+                  <sch:examID>XML</sch:examID>\r
+               </sch:test>\r
+               <sch:slots>\r
+                  <sch:slot>\r
+                     <sch:siteCode>${#TestSuite#siteCode}</sch:siteCode>\r
+                     <sch:startTime>${#TestSuite#testTime}</sch:startTime>\r
+                     <sch:adminID>${#TestSuite#adminId}</sch:adminID>\r
+                  </sch:slot>\r
+               </sch:slots>\r
+               <sch:feeWaivedFlag>false</sch:feeWaivedFlag>\r
+               <sch:searchServiceOptInStatus>Y</sch:searchServiceOptInStatus>\r
+            </sch:booking>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>24</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>273</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>26</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>22</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>25</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>522</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>14</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>418</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>27</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>385</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:DQResponses>\r
+               <sch:questionSetID>5</sch:questionSetID>\r
+               <sch:questionID>28</sch:questionID>\r
+               <sch:questionResponse>\r
+                  <sch:id>30</sch:id>\r
+               </sch:questionResponse>\r
+            </sch:DQResponses>\r
+            <sch:govermentIDs>\r
+               <sch:type>International ID</sch:type>\r
+               <sch:value>${Properties#ThirdPartyProfileId}${Properties#randomString}12</sch:value>\r
+               <sch:issuingCountryCode>CHN</sch:issuingCountryCode>\r
+            </sch:govermentIDs>\r
+         </sch:Scheduling_SOA_Message>\r
+      </thir:SchedulingRequest>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="452ffbdc-af0a-478e-9df9-5380eea24974"/><con:assertion type="Valid HTTP Status Codes" id="8a7ed53f-4a2a-4ca6-b5bc-33eb3bdcbc3b" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="0758baea-5f8f-450a-8719-1669b731355b" name="Match content of [id]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/clientTransactionId[1]/id[1]/text()</path><content>${Properties#clientTransactionId}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="e4492065-867b-46d8-b5bd-bdb9a7c50943" name="Match content of [ns2:accountingDate]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/accountingDate[1]/text()</path><content>2017-11-26T00:00:00-05:00</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="ecabf645-09b9-4456-bf0d-6a90b71368df" name="Match content of [ns2:thirdPartyProfileID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:thirdPartyProfileID[1]/text()</path><content>${Properties#ThirdPartyProfileId}${Properties#randomString}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="60d3b613-bae6-4278-a39b-da9ed4dadc42" name="Check for existence of [ns2:etsAppointmentID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+exists( //ns3:SchedulingResponse/ns2:Scheduling_SOA_Message/ns2:booking/ns2:etsAppointmentID)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="290932c7-f5e2-4fdf-8fe8-060c2e315da3" name="Match content of [ns2:thirdPartyAppointmentID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:thirdPartyAppointmentID[1]/text()</path><content>${Properties#ThirdPartyProfileId}9</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="d3b7f4d3-c06c-4dc5-9938-3a45f61dccfe" name="Match content of [ns2:etsProfileID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:etsProfileID[1]/text()</path><content>${Properties#EtsProfileID}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="d5c5576b-5b75-4e80-9400-3b6724569862" name="Match content of [status]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/status[1]/text()</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="ad21355b-2f60-4556-9f7b-b681898fa302" name="Match content of [ns2:feeWaivedFlag]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:feeWaivedFlag[1]/text()</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>No Authorization</con:authProfile></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:testStep type="jdbc" name="verify_APPT_LNKG_table" id="b1e26606-7110-4672-8e87-b47572ca9188"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM APPT_LNKG Where APPT_LNKG_TYP_CDE = 'TPAID' AND BKNG_ID IN (SELECT BKNG_ID FROM BKNG WHERE CUST_FST_NAM= 'ch${Properties#randomString}first')
+ </con:query><con:assertion type="XPath Match" id="18c79061-5936-4b24-88b7-98e7a4e40992" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_ORG_table" id="bfc58ecc-5273-407a-8e04-b3623e6697b9"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM ORG WHERE ORG_ID_NO IN (SELECT TST_CNTR_ID_NO FROM BKNG WHERE CUST_FST_NAM = 'ch${Properties#randomString}first')
+ </con:query><con:assertion type="XPath Match" id="18c79061-5936-4b24-88b7-98e7a4e40992" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="082b6c20-eb8e-416a-8463-8f9dbf1a9794" name="Match content of [EXTRNL_ORG_ID]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/EXTRNL_ORG_ID[1]/text()</path><content>STNNEEA</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="792d5eb0-7e72-495f-9bbf-1b78114860b4" name="Match content of [ORG_NAM]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/ORG_NAM[1]/text()</path><content>STNNEEA</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_BKNG_table" id="d17df26a-6e52-41d5-9f9d-2a26ee72eb10"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM BKNG WHERE CUST_FST_NAM = 'ch${Properties#randomString}first'
+ </con:query><con:assertion type="XPath Match" id="18c79061-5936-4b24-88b7-98e7a4e40992" name="Check count of [Row]"><con:configuration><path>count( //Results/ResultSet/Row)</path><content>1</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="a070610d-f491-464f-b68c-d2e7af2a839e" name="Match content of [APPT_DTE_STR]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/APPT_DTE_STR[1]/text()</path><content>${#TestSuite#testDate}T09:00:00+08:00</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="15b484c3-f6df-4316-be99-5ae5ecdc0dc7" name="Match content of [EXTRNL_ADM_ID]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/EXTRNL_ADM_ID[1]/text()</path><content>${#TestSuite#adminId}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:testStep type="jdbc" name="verify_CUST_SRCH_SVC_table" id="57feb508-e3fd-4ecf-bc26-ad003fe56196"><con:settings><con:setting id="prettyPrintResponse">true</con:setting></con:settings><con:config xsi:type="con:JdbcRequestTestStep" convertColumnNamesToUpperCase="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:dbConnectionName xsi:nil="true"/><con:driver>${DB-Driver}</con:driver><con:connectionString>${Database}</con:connectionString><con:password/><con:query>SELECT * FROM CUST_SRCH_SVC WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM ETS_CUST_LNKG WHERE LNKG_TYP_CDE = 'DSPID' AND LNKG_KY = '${Properties#EtsProfileId}')</con:query><con:assertion type="XPath Match" id="816978ba-722f-4c19-9566-f561e8f25fcf" name="Match content of [SRCH_SVC_TYP_CDE]"><con:configuration><path>//Results[1]/ResultSet[1]/Row[1]/SRCH_SVC_TYP_CDE[1]/text()</path><content>OPTNY</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:properties/></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>b4a1fa4b-54ba-431b-ab84-59a7409a991b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c15a450c-3a20-4d89-b986-c528fa1627cd</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>5e8d6a35-03a3-4135-bbf5-6f67229b64e6</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>509778c9-e453-45a8-a6f7-f609bd14298d</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>b75f5228-badb-40f5-a274-172b035947b0</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c448800d-52c2-4faf-9bc7-04e9ca59f992</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>c69f0a10-f285-45dc-b19a-b07979e2f42b</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>8aa0f519-a0ba-4990-848d-69764b972bc2</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>b16b8b01-81dc-4560-967b-1f56974dc230</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:breakPoints><con:testStepId>3f9e517b-069e-4dbb-a084-6ade4d8518cb</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

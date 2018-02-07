@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="fc8a5e06-48f6-4a2b-8f90-1a26305dc2a1" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="EmptySource" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="fc8a5e06-48f6-4a2b-8f90-1a26305dc2a1fileName">EmptySource</con:setting></con:settings><con:testStep type="request" name="EmptySource" id="747258df-c3b7-4a67-8b4a-2523b75f5775"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NeeaAppointmentService</con:interface><con:operation>doScheduling</con:operation><con:request name="EmptySource" id="723fa623-368d-4d77-8e81-ff5852f0da69"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaSchedulingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices" xmlns:ns1="http://ereg.ets.org/external/service/soap/neea/schema">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-188A97C98AB3ACF83A15082577701591">
+            <wsse:Username>Intsyseregdvi</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">1qaz@WSX</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">rNFwSG6od/yQuX3mbK1CwQ==</wsse:Nonce>
+            <wsu:Created>2017-10-17T16:29:30.154Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <thir:SchedulingRequest>
+         <ns1:Scheduling_SOA_Message>
+            <ns1:requestHeader>
+               <informationCategory>
+                  <classificationCode>01</classificationCode>
+                  <classificationMessage/>
+               </informationCategory>
+               <clientTransactionId>
+                  <id>33</id>
+                  
+               </clientTransactionId>
+               <requestTime>2017-08-22T22:36:19.041+08:00</requestTime>
+               <batchid>
+                  <id>1217072227</id>
+                  
+               </batchid>
+               <sessionid>
+                  <id>15666522</id>
+                  
+               </sessionid>
+               <action>Order.ProfileSearch</action>
+               <source></source>
+               <ns1:programCode>TEL</ns1:programCode>
+              <accountingDate>2017-08-22</accountingDate>
+               <requestsData>
+                  <request>
+                     <name>citizenshipCountry</name>
+                     <data>
+                        <string>CHN</string>
+                     </data>
+                  </request>
+               </requestsData>
+               <accountingValue>121707222733</accountingValue>
+               <eventDate>2017-08-22T17:43:29.000+08:00</eventDate>
+            </ns1:requestHeader>
+            <ns1:booking>
+               <ns1:etsProfileID>4U70FGBE</ns1:etsProfileID>
+               <ns1:thirdPartyProfileID>20171118737gsnh</ns1:thirdPartyProfileID>
+               <ns1:thirdPartyAppointmentID>0</ns1:thirdPartyAppointmentID>
+               <ns1:test>
+                  <ns1:programCode>TEL</ns1:programCode>
+                  <ns1:examID>XML</ns1:examID>
+               </ns1:test>
+               <ns1:feeWaivedFlag>true</ns1:feeWaivedFlag>
+               <ns1:searchServiceOptInStatus>N</ns1:searchServiceOptInStatus>
+            </ns1:booking>
+         </ns1:Scheduling_SOA_Message>
+      </thir:SchedulingRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="d1cada14-0999-4c71-8458-72ecd9803012"/><con:assertion type="XPath Match" id="4c1341d8-b35d-40a4-a535-00b069edf292" name="Match content of [text]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/messages[1]/message[2]/text[1]/text()</path><content>Source is required.</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="805f6b11-e891-4876-836a-ec51319bd467" name="Match content of [status]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/status[1]/text()</path><content>false</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

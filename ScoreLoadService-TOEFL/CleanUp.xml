@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="602f8f65-fa61-43e6-99cd-9914d1eabd6b" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="CleanUp" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="602f8f65-fa61-43e6-99cd-9914d1eabd6bfileName">CleanUp</con:setting></con:settings><con:testStep type="properties" name="Properties" id="e07ebe4e-b512-46a9-8665-dfa09047fbbe"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>BKNG_ID</con:name><con:value>2661318</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="groovy" name="Groovy" id="00c1e2fc-bc66-41e4-a2ff-6810fa0b2ad7"><con:settings/><con:config><script>import groovy.sql.Sql
+import java.sql.*
+
+def connectionString = context.expand( '${Database}' );
+def bKNG_ID = context.expand( '${Properties#BKNG_ID}' );
+
+ScoreLoad sl = new ScoreLoad(connectionString);
+def cleanUpStatus = sl.CleanUp(bKNG_ID);
+log.info(cleanUpStatus);
+
+class ScoreLoad {
+	private static String connectionString = null;
+	public ScoreLoad(String connectionString) {
+			this.connectionString = connectionString;
+	}
+	
+  public CleanUp (String bKNG_ID) {
+        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());	   
+       Connection con = DriverManager.getConnection(connectionString);
+		Statement stmt = null;
+		String cleanUpStatus = null;
+
+		int[] results = null;
+		try {
+			stmt = con.createStatement();
+			stmt.addBatch("DELETE FROM TST_SCR WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("DELETE FROM TST_SCR_XML WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("DELETE FROM BKNG_ADTNL_FLD WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("DELETE FROM BKNG_ANLYS_RSLT WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("DELETE FROM BKNG_SCR_RPT_STGNG WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("DELETE FROM HLD_STS WHERE HLD_ID IN (SELECT HLD_ID FROM HLD WHERE BKNG_ID = " + bKNG_ID +")");
+			stmt.addBatch("DELETE FROM HLD WHERE BKNG_ID = " + bKNG_ID);
+			stmt.addBatch("UPDATE BKNG SET BKNG_STS_TYP_CDE = 'RSRVD', SCR_STS_TYP_CDE = null, TST_CNTR_ID_NO = 700000477763,UPDATED_BY_ADMIN_USR_ID=null,DATE_UPDATED=DATE_CREATED,SCR_RPT_STS_CDE=null,DOC_ID=null,IBIS_TST_ADM_ID=null,SCR_RPTBL_FLG=null WHERE BKNG_ID = " + bKNG_ID );
+			stmt.addBatch("DELETE FROM BKNG_ORG_SLCTN WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')");
+			stmt.addBatch("DELETE FROM BKNG_DMGRPH_RSP WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')");
+			stmt.addBatch("DELETE FROM CUST_DMGRPH_RSP WHERE CUSTOMER_ID IN (SELECT CUSTOMER_ID FROM BLC_CUSTOMER WHERE FIRST_NAME IN (SELECT CUST_FST_NAM FROM BKNG WHERE BKNG_ID= " + bKNG_ID + ")) AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')");
+			results = stmt.executeBatch();
+			cleanUpStatus = "New Scores cleanup completed for BKNG_ID : " + bKNG_ID;
+		} catch (SQLException e) {
+			cleanUpStatus = "New Scores cleanup FAILED!! for BKNG_ID : " + bKNG_ID;
+			System.out.println(e);	
+		} finally {
+			if (stmt != null) {
+				stmt.close();
+			}
+		}
+		
+		return cleanUpStatus;
+    }
+}</script></con:config></con:testStep><con:properties><con:property><con:name>running</con:name><con:value>false</con:value></con:property></con:properties><con:reportParameters/></con:testCase>

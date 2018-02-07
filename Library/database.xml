@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="791cb430-3a1d-46c9-85c3-1db02c4c0c3a" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="database" searchProperties="true" timeout="0" maxResults="0" disabled="true" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="791cb430-3a1d-46c9-85c3-1db02c4c0c3afileName">database</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="groovy" name="executeQueries" id="5dcf246f-2afc-41dd-b1d7-e0985382e833" disabled="true"><con:settings/><con:config><script>import groovy.sql.Sql
+import oracle.jdbc.driver.OracleTypes
+
+
+class DBfactory {
+ def log
+ def context
+ def testRunner
+// def env = testRunner.testCase.testSuite.project.activeEnvironment.name
+ def JDBC = "jdbc:oracle:thin:EREG04DV_WEB/EREG04WEB\$6783@//oco28-crs-scan:1526/EREG12D"
+ //def JDBC = "jdbc:oracle:thin:EREG04D2D_WEB/EREG04D2D_\$PSW@//oco28-crs-scan.etslan.org:1526/EREG12D"
+  //log.info "JDBC= " +  bKNG_ID
+
+ def sql = Sql.newInstance(JDBC)
+
+ def DBfactory(logIn, contextIn, testRunnerIn) {
+  this.log = logIn
+  this.context = contextIn
+  this.testRunner = testRunnerIn
+ }
+
+
+ def cleanUpBooking(bKNG_ID) {
+  log.info "bKNG_ID = " + bKNG_ID
+  try {
+   sql.execute("delete from tst_scr where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from tst_scr_xml where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from bkng_adtnl_fld where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from BKNG_ANLYS_RSLT where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from BKNG_SCR_RPT_STGNG where bkng_id = " + bKNG_ID + "")
+//   sql.execute("DELETE FROM BKNG_ORG_SLCTN WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')")
+   sql.execute("delete from HLD_STS WHERE HLD_ID IN (SELECT HLD_ID FROM HLD WHERE bkng_id= " + bKNG_ID + ")")
+   sql.execute("delete from HLD where bkng_id = " + bKNG_ID + "")
+   sql.execute("UPDATE BKNG SET BKNG_STS_TYP_CDE = 'RSRVD',TST_CNTR_ID_NO = 700000477763,UPDATED_BY_ADMIN_USR_ID=null,DATE_UPDATED=DATE_CREATED,SCR_RPT_STS_CDE=null,DOC_ID=null,IBIS_TST_ADM_ID=null WHERE BKNG_ID = " + bKNG_ID + "")
+
+   sql.execute("commit")
+
+  } catch (Exception e) {
+   e.printStackTrace()
+  } finally {
+   try {
+    if (sql != null)
+     sql.close()
+   } catch (Exception se) {
+    se.printStackTrace();
+   }
+  }
+  return "cleanUp Complete"
+ }
+
+ def cleanUpReScoresData(bKNG_ID) {
+  log.info "bKNG_ID = " + bKNG_ID
+  try {
+   sql.execute("delete from rscr_tst_scr where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from rscr_tst_scr_xml where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from rscr_bkng_adtnl_fld where bkng_id = " + bKNG_ID + "")
+   sql.execute("delete from BKNG_SCR_RPT_STGNG where bkng_id = " + bKNG_ID + "")
+   sql.execute("DELETE FROM BKNG_ORG_SLCTN WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')")
+   sql.execute("DELETE FROM BKNG_DMGRPH_RSP WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')")
+   sql.execute("DELETE FROM CUST_DMGRPH_RSP WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')")
+   sql.execute("delete from HLD_STS WHERE HLD_ID IN (SELECT HLD_ID FROM HLD WHERE bkng_id= " + bKNG_ID + ")")
+   sql.execute("delete from HLD where bkng_id = " + bKNG_ID + "")
+   sql.execute("DELETE FROM RSCR_RQST WHERE BKNG_ID = " + bKNG_ID + " AND TO_CHAR(DATE_CREATED, 'MM-DD-YYYY') = TO_CHAR(SYSDATE, 'MM-DD-YYYY')")
+   sql.execute("UPDATE BKNG SET BKNG_STS_TYP_CDE = 'RSRVD',TST_CNTR_ID_NO = 700000477763,UPDATED_BY_ADMIN_USR_ID=null,DATE_UPDATED=DATE_CREATED,SCR_RPT_STS_CDE=null,DOC_ID=null,IBIS_TST_ADM_ID=null WHERE BKNG_ID = " + bKNG_ID + "")
+
+   sql.execute("commit")
+
+  } catch (Exception e) {
+   e.printStackTrace()
+  } finally {
+   try {
+    if (sql != null)
+     sql.close()
+   } catch (Exception se) {
+    se.printStackTrace();
+   }
+  }
+  return "Rescores cleanUp Complete"
+ }
+
+}
+
+context.setProperty("dbActions", new DBfactory(log, context, testRunner))
+log.info "Library Context:" + context</script></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script" id="6c89bec7-fb23-426a-b87d-7f10265e9351"><con:settings/><con:config><script>import cleanup.SettlementService;
+
+SettlementService CleanData = new SettlementService("d2d");
+log.info CleanData.chargeBack(331557);
+
+</script></con:config></con:testStep><con:testStep type="groovy" name="Copy of Groovy Script" id="5b2aefc6-1df4-48c6-a331-0db8899e6287"><con:settings/><con:config><script>//import helloworldtest.HWT;
+//log.info HWT.Testing(" SRIKAR");
+//HWT H = new HWT();
+//log.info H.chargeBack(H.getConnection(),331557);
+
+import cleanup.SettlementService;
+
+SettlementService CleanData = new SettlementService("d2d");
+log.info CleanData.chargeBack(331556);
+
+</script></con:config></con:testStep><con:properties/><con:reportParameters/><con:breakPoints><con:testStepId>5dcf246f-2afc-41dd-b1d7-e0985382e833</con:testStepId><con:status>NONE</con:status><con:properties/></con:breakPoints><con:environmentSpec><con:entry environmentId="c5f2be6e-96f6-4f7b-8c06-9027807d55b3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="5c76c1c8-0b52-4c16-a576-30e5ec0e03e3"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1ccf3773-9147-4d54-bde6-0a0d51cf0dc9"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="3c247fad-11ea-48df-9244-ccc1c452c36f"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

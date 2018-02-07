@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="b09477bb-226e-43a1-82fe-18b876572e21" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="CancelAppointment" searchProperties="true" timeout="0" disabled="true" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="0d1cd907-5555-41d2-843d-592eb2aa223afileName">RescheduleAppointment</con:setting><con:setting id="b09477bb-226e-43a1-82fe-18b876572e21fileName">CancelAppointment</con:setting></con:settings><con:savedRecentRuns>1</con:savedRecentRuns><con:testStep type="request" name="CancelAppointment" id="2e394e60-807f-4446-bd4b-b94174e7e883"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NeeaAppointmentService</con:interface><con:operation>doScheduling</con:operation><con:request name="CancelAppointment" id="3a323cea-cfc7-4fa4-abde-c0abbfd12dd1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-soap-dev.ereg.ets.org/ereg-soap-service/ereg/soap/neeaSchedulingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:thir="http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices" 
+xmlns:sch="http://ereg.ets.org/external/service/soap/neea/scheduling/schemas">
+  <soapenv:Header/>
+  <soapenv:Body>
+      <thir:SchedulingRequest>
+         <sch:Scheduling_SOA_Message>
+
+			<sch:requestHeader>
+                <informationCategory  >
+                    <classificationCode>01</classificationCode>
+                    <classificationMessage/>
+                </informationCategory>
+                <clientTransactionId  >
+                    <id>1</id>
+                    <guid/>
+                </clientTransactionId>
+                <requestTime>2017-09-06T14:18:24.080+08:00</requestTime>
+                <batchid  >
+                    <id>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#RawRequest#declare namespace sch='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace thir='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //thir:SchedulingRequest[1]/sch:Scheduling_SOA_Message[1]/sch:requestHeader[1]/sessionid[1]/id[1]}</id>
+                    <guid/>
+                </batchid>
+                <sessionid>
+                    <id>15335258</id>
+                    <guid/>
+                </sessionid>
+                <action>Order.CancelOrder</action>
+                <source>${#TestSuite#source}</source>
+                <programCode>TEL</programCode>
+                <accountingDate>2017-09-06</accountingDate>
+                <requestsData>
+                    <request>
+                        <name>lateRegistrationFlag</name>
+                        <data>
+                            <string>false</string>
+                        </data>
+                    </request>
+                </requestsData>
+                <accountingValue>2117032712-29</accountingValue>
+                <eventDate  >2017-09-06T14:18:24.080+08:00</eventDate>
+            </sch:requestHeader>
+            <sch:booking>
+                <sch:etsProfileID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#RawRequest#declare namespace sch='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace thir='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //thir:SchedulingRequest[1]/sch:Scheduling_SOA_Message[1]/sch:booking[1]/sch:etsProfileID[1]}</sch:etsProfileID>
+                <sch:thirdPartyProfileID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#RawRequest#declare namespace sch='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace thir='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //thir:SchedulingRequest[1]/sch:Scheduling_SOA_Message[1]/sch:booking[1]/sch:thirdPartyProfileID[1]}</sch:thirdPartyProfileID>
+                 <sch:etsAppointmentID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#Response#declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace ns4='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //ns4:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:etsAppointmentID[1]}</sch:etsAppointmentID>
+                  <sch:priorETSAppointmentID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#Response#declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace ns4='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //ns4:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:etsAppointmentID[1]}</sch:priorETSAppointmentID>
+                <sch:thirdPartyAppointmentID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#RawRequest#declare namespace sch='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace thir='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //thir:SchedulingRequest[1]/sch:Scheduling_SOA_Message[1]/sch:booking[1]/sch:thirdPartyAppointmentID[1]}</sch:thirdPartyAppointmentID>
+                <sch:priorThirdPartyAppointmentID>${#[NEEA_AppointmentService#CreateRegistration#CreateRegistration]#RawRequest#declare namespace sch='http://ereg.ets.org/external/service/soap/neea/scheduling/schemas'; declare namespace thir='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices'; //thir:SchedulingRequest[1]/sch:Scheduling_SOA_Message[1]/sch:booking[1]/sch:thirdPartyAppointmentID[1]}</sch:priorThirdPartyAppointmentID>
+                <sch:test>
+                    <programCode>TEL</programCode>
+                    <sch:examID>XML</sch:examID>
+                </sch:test>
+                <sch:slots>
+                    <sch:slot>
+                        <sch:siteCode>STNDEV3</sch:siteCode>
+                        <sch:startTime>2017-12-15T09:00:00.000+08:00</sch:startTime>
+                        <sch:adminID>20170827A</sch:adminID>
+                    </sch:slot>
+                </sch:slots>
+                <sch:feeWaivedFlag>false</sch:feeWaivedFlag>
+                <sch:searchServiceOptInStatus>Y</sch:searchServiceOptInStatus>
+            </sch:booking>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>24</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>273</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>26</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>22</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>25</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>376</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>14</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>352</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>27</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>18</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            <sch:DQResponses>
+                <sch:questionSetID>5</sch:questionSetID>
+                <sch:questionID>28</sch:questionID>
+                <sch:questionResponse>
+                    <sch:id>31</sch:id>
+                </sch:questionResponse>
+            </sch:DQResponses>
+            </sch:Scheduling_SOA_Message>
+      </thir:SchedulingRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6638f46a-ad21-4323-bb7a-da35ae9981ad"/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="1616f813-7e88-44f3-9295-00c26c282621"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8d9a0c7e-6293-4ea0-ae89-48b18a6caf96"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>

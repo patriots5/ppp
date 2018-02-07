@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:testCase id="1e821aff-f03e-42dc-a36f-3b5bd6cefbe9" discardOkResults="true" failOnError="true" failTestCaseOnErrors="true" keepSession="false" name="SearchProfile" searchProperties="true" timeout="0" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="1e821aff-f03e-42dc-a36f-3b5bd6cefbe9fileName">SearchProfile</con:setting></con:settings><con:testStep type="request" name="SearchProfile" id="b011ddc8-48dc-4612-9007-b20db5c9755e"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>NeeaAppointmentService</con:interface><con:operation>doScheduling</con:operation><con:request name="SearchProfile" id="f2a5a1ba-77b8-49af-b501-433831ea4cbd"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://v2-neea-dev.ereg.ets.org/ereg-neea-service/ereg/soap/neeaSchedulingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:thir="http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices" xmlns:ns1="http://ereg.ets.org/external/service/soap/neea/schema">
+   <soapenv:Header>
+      <wsse:Security soapenv:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+         <wsse:UsernameToken wsu:Id="UsernameToken-188A97C98AB3ACF83A15082577701591">
+            <wsse:Username>Intsyseregdvi</wsse:Username>
+            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">1qaz@WSX</wsse:Password>
+            <wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">rNFwSG6od/yQuX3mbK1CwQ==</wsse:Nonce>
+            <wsu:Created>2017-10-17T16:29:30.154Z</wsu:Created>
+         </wsse:UsernameToken>
+      </wsse:Security>
+   </soapenv:Header>
+   <soapenv:Body>
+      <thir:SchedulingRequest>
+         <ns1:Scheduling_SOA_Message>
+            <ns1:requestHeader>
+               <informationCategory>
+                  <classificationCode>01</classificationCode>
+                  <classificationMessage/>
+               </informationCategory>
+               <clientTransactionId>
+                  <id>33</id>
+               </clientTransactionId>
+               <requestTime>2017-08-22T22:36:19.041+08:00</requestTime>
+               <batchid>
+                  <id>1217072227</id>
+               </batchid>
+               <sessionid>
+                  <id>15666522</id>
+               </sessionid>
+               <action>Order.ProfileSearch</action>
+               <source>NEEA</source>
+               <ns1:programCode>TEL</ns1:programCode>
+               <accountingDate>2017-08-22</accountingDate>
+               <requestsData>
+                  <request>
+                     <name>citizenshipCountry</name>
+                     <data>
+                        <string>CHN</string>
+                     </data>
+                  </request>
+               </requestsData>
+               <accountingValue>121707222733</accountingValue>
+               <eventDate>2017-11-17T17:43:29.000+08:00</eventDate>
+            </ns1:requestHeader>
+            <ns1:booking>
+               <ns1:etsProfileID>4U70FGBE</ns1:etsProfileID>
+               <ns1:thirdPartyProfileID>20171118737gsnh</ns1:thirdPartyProfileID>
+               <ns1:thirdPartyAppointmentID>0</ns1:thirdPartyAppointmentID>
+               <ns1:test>
+                  <ns1:programCode>TEL</ns1:programCode>
+                  <ns1:examID>XML</ns1:examID>
+               </ns1:test>
+               <ns1:feeWaivedFlag>true</ns1:feeWaivedFlag>
+               <ns1:searchServiceOptInStatus>N</ns1:searchServiceOptInStatus>
+            </ns1:booking>
+         </ns1:Scheduling_SOA_Message>
+      </thir:SchedulingRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="b643c275-ee16-4221-a353-4addbe20425f"/><con:assertion type="XPath Match" id="552a56f1-6275-4ef9-a66e-d6e76416e6e2" name="Match content of [ns2:programCode]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:test[1]/ns2:programCode[1]/text()</path><content>TEL</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="57ae438a-cc00-4ea5-bc20-8414f2a17d0c" name="Match content of [ns2:examID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:test[1]/ns2:examID[1]/text()</path><content>XML</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="99879d73-0801-4f10-ba6a-95e896536142" name="Match content of [ns2:etsProfileID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:etsProfileID[1]/text()</path><content>${#TestSuite#EtsProfileID}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Valid HTTP Status Codes" id="900f420a-d5b0-4eda-b6f0-fa17176ce5e5" name="Valid HTTP Status Codes"><con:settings/><con:configuration><codes>200</codes></con:configuration></con:assertion><con:assertion type="XPath Match" id="0426dd01-66ec-4d15-ab31-dcbc2b6b8fde" name="Match content of [id]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/clientTransactionId[1]/id[1]/text()</path><content>33</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="9d3014ca-4d67-4b80-9c2c-6c697696e755" name="Match content of [ns2:transactionType]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/ns2:transactionType[1]/text()</path><content>Order.ProfileSearch</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="5654e3c7-5f72-4242-96e8-e92ed0223104" name="Match content of [ns2:accountingDate]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/accountingDate[1]/text()</path><content>2017-08-22-04:00</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="6d2a4c81-6242-4743-a15e-2ad9940bca64" name="Match content of [ns2:thirdPartyProfileID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:thirdPartyProfileID[1]/text()</path><content>${#TestSuite#thirdPartyProfileId}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="abfe668e-b35a-4381-9fc4-34c4f5541a7b" name="Match content of [ns2:etsProfileID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:etsProfileID[1]/text()</path><content>${#TestSuite#EtsProfileID}</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="7d72edc3-3ecb-4c17-a608-d421806cb604" name="Match content of [ns2:thirdPartyAppointmentID]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:thirdPartyAppointmentID[1]/text()</path><content>0</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="4e1a4821-1aac-433a-8912-fbffcd558fa1" name="Match content of [status]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:responseHeader[1]/status[1]/text()</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="e73a3332-5756-41f1-91fd-405e02c16046" name="Match content of [ns2:feeWaivedFlag]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+//ns3:SchedulingResponse[1]/ns2:Scheduling_SOA_Message[1]/ns2:booking[1]/ns2:feeWaivedFlag[1]/text()</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" id="8eca98e6-ae08-48fa-bae3-40d140e70f61" name="Check for existence of [ns2:responseTime]"><con:configuration><path>declare namespace ns2='http://ereg.ets.org/external/service/soap/neea/schema';
+declare namespace ns3='http://ereg.ets.org/external/service/soap/neea/scheduling/services/ThirdPartySchedulingServices';
+exists( //ns3:SchedulingResponse/ns2:Scheduling_SOA_Message/ns2:responseHeader/ns2:responseTime)</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/><con:environmentSpec><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry><con:entry environmentId="8a20f3d0-3ddd-42c2-9e03-779de7421e8a"><con:authProfile>No Authorization</con:authProfile></con:entry></con:environmentSpec></con:request></con:config></con:testStep><con:properties/><con:reportParameters/><con:environmentSpec><con:entry environmentId="2c3ec9ec-bb1f-45d5-a8cc-50b0b05d3240"><con:authProfile>Inherit From Parent</con:authProfile></con:entry></con:environmentSpec></con:testCase>
